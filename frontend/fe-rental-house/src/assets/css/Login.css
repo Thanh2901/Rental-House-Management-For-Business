@@ -1,0 +1,200 @@
+/* Wrapper to scope styles and prevent conflicts */
+.login-page-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+/* Container chính của trang */
+.login-page-wrapper .login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #ffffff; /* Gradient background */
+}
+
+/* Container của form */
+.login-page-wrapper .auth-container {
+    max-width: 400px;
+    width: 100%;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-align: center;
+}
+
+/* Tiêu đề */
+.login-page-wrapper .auth-container h2 {
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #000000; /* Black text */
+}
+
+/* Form group */
+.login-page-wrapper .form-group {
+    margin-bottom: 20px;
+    text-align: left; /* Align labels to the left */
+}
+
+/* Label */
+.login-page-wrapper .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000; /* Black text */
+}
+
+/* Input */
+.login-page-wrapper .form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dfe6e9; /* Light gray border */
+    border-radius: 6px; /* Rounded corners */
+    font-size: 16px;
+    background-color: #ffffff; /* White background */
+    box-sizing: border-box;
+}
+
+.login-page-wrapper .form-group input::placeholder {
+    color: #b0b0b0; /* Light gray placeholder text */
+}
+
+/* Security note */
+.login-page-wrapper .security-note {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #7f8c8d; /* Same color as the links */
+    line-height: 1.4;
+}
+
+.login-page-wrapper .security-note a {
+    color: #3498db; /* Blue link color */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-page-wrapper .security-note a:hover {
+    text-decoration: underline;
+    color: #2980b9;
+}
+
+/* Nút đăng nhập */
+.login-page-wrapper button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff7043; /* Peach-orange button */
+    color: white;
+    border: none;
+    border-radius: 6px; /* Rounded corners */
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.login-page-wrapper button:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+/* Spinner */
+.login-page-wrapper .spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid #fff;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Links */
+.login-page-wrapper .links {
+    margin-top: 15px;
+}
+
+.login-page-wrapper .forgot-password-link,
+.login-page-wrapper .register-link {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #000000; /* Black text */
+}
+
+.login-page-wrapper .forgot-password-link a,
+.login-page-wrapper .register-link a {
+    color: #3498db; /* Blue links */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-page-wrapper .forgot-password-link a:hover,
+.login-page-wrapper .register-link a:hover {
+    text-decoration: underline;
+    color: #2980b9;
+}
+
+/* Thêm vào phần cuối file Navbar.css */
+
+/* Avatar người dùng */
+.user-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* Tên người dùng */
+.user-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: #f4a261;
+}
+
+/* Điều chỉnh dropdown toggle để chứa avatar và tên */
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: #f4a261;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dropdown-toggle {
+        justify-content: center;
+    }
+
+    .user-avatar {
+        width: 25px;
+        height: 25px;
+    }
+
+    .user-name {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .user-avatar {
+        width: 20px;
+        height: 20px;
+    }
+
+    .user-name {
+        font-size: 12px;
+    }
+}

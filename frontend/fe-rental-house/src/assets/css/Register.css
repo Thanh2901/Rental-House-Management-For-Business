@@ -1,0 +1,137 @@
+/* ✅ Container chính của form */
+/* ✅ Thêm hiệu ứng xuất hiện */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px); /* Bắt đầu từ dưới */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Di chuyển về vị trí ban đầu */
+    }
+}
+
+/* ✅ Container chính của form */
+.auth-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background: linear-gradient(135deg, #ffecd2, #fcb69f); /* Gradient cam pastel */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+
+    /* 👇 Thêm hiệu ứng khi xuất hiện */
+    opacity: 0; /* Ẩn ban đầu */
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/*.auth-container {*/
+/*    width: 100%;*/
+/*    max-width: 400px;*/
+/*    margin: 50px auto;*/
+/*    padding: 30px;*/
+/*    background: linear-gradient(135deg, #ffecd2, #fcb69f); !* Gradient cam pastel *!*/
+/*    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);*/
+/*    border-radius: 10px;*/
+/*    text-align: center;*/
+/*}*/
+
+/* ✅ Tiêu đề */
+.auth-container h2 {
+    color: #4A3F35; /* Nâu đất */
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* ✅ Form Group */
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+/* ✅ Label */
+.form-group label {
+    font-size: 14px;
+    color: #5a4a42;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* ✅ Input Fields */
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #d4af37; /* Vàng gold */
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+/* ✅ Input focus */
+.form-group input:focus {
+    border-color: #ff5733; /* Cam cháy */
+    box-shadow: 0 0 8px rgba(255, 87, 51, 0.3);
+    outline: none;
+}
+
+/* ✅ Nút đăng ký */
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: #D77A61; /* Cam đất */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* ✅ Hover nút */
+button[type="submit"]:hover {
+    background-color: #b65d1e; /* Cam đậm hơn */
+}
+
+/* ✅ Link chuyển sang Login */
+.register-link {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.register-link a {
+    color: #d66d48;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.register-link a:hover {
+    color: #b33c1f; /* Cam đậm hơn */
+}
+
+/* ✅ Thông báo lỗi hoặc thành công */
+.success-message {
+    color: #2d882d;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.error-message {
+    color: #d63031;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* ✅ Responsive */
+@media (max-width: 480px) {
+    .auth-container {
+        width: 90%;
+        padding: 20px;
+    }
+}

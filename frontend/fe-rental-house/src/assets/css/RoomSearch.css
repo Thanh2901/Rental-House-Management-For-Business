@@ -1,0 +1,96 @@
+/* 🔹 Tăng chiều rộng và canh giữa */
+.search-container {
+    background: #fadfd1;  /* Màu nền sáng hơn */
+    padding: 24px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 85%;  /* Rộng hơn, phù hợp với layout */
+    max-width: 900px;
+    margin: 20px auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng nổi nhẹ */
+}
+
+/* 🔹 Tăng kích thước ô nhập và căn chỉnh */
+.search-fields {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    background: white;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔹 Cập nhật input và dropdown */
+.search-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.search-field label {
+    font-weight: bold;
+    margin-bottom: 4px;
+    font-size: 14px;  /* Giảm từ 16px -> 14px */
+    color: #333;
+}
+
+.date-input, .room-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* 🔹 Tăng kích thước nút "Search Rooms" và thay đổi màu */
+.search-button {
+    background: #FFA500; /* Màu cam theo tông trang web */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px;
+    transition: background 0.3s ease;
+}
+
+.search-button:hover {
+    background: #FF8C00; /* Màu cam đậm hơn khi hover */
+}
+
+/* 🔹 Giảm kích thước chữ của tiêu đề tháng */
+.react-datepicker__current-month {
+    font-size: 14px !important; /* Giảm tiếp xuống 14px */
+    font-weight: bold;
+}
+
+/* 🔹 Giảm kích thước chữ của ngày trong lịch */
+.react-datepicker__day,
+.react-datepicker__day-name {
+    font-size: 12px !important; /* Giảm từ 14px xuống 12px */
+    width: 30px; /* Thu nhỏ ô ngày */
+    height: 30px;
+    line-height: 30px;
+}
+
+/* 🔹 Giảm kích thước mũi tên điều hướng */
+.react-datepicker__navigation {
+    width: 20px;
+    height: 20px;
+}
+
+/* 🔹 Giảm kích thước chữ trong phần chọn năm & tháng */
+.react-datepicker__year-read-view,
+.react-datepicker__month-read-view {
+    font-size: 12px !important;
+}

@@ -1,0 +1,333 @@
+/* LandingPage.css */
+.landing-page {
+    overflow-x: hidden;
+}
+
+.landing-page .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Typography */
+.landing-page h1,
+.landing-page h2,
+.landing-page h3 {
+    font-weight: 700;
+    color: #2c3e50;
+    line-height: 1.2;
+}
+
+.landing-page h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.landing-page h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+}
+
+.landing-page h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: #f5a623; /* Đổi sang màu cam để đồng bộ */
+}
+
+.landing-page p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Section styles */
+.landing-page section {
+    padding: 80px 0;
+}
+
+.landing-page .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* Button styles */
+.landing-page button {
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 5px; /* Đồng bộ với nút trong Navbar */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+    margin: 0.5rem;
+}
+
+.landing-page .btn-primary {
+    background-color: #f5a623; /* Đổi sang màu cam */
+    color: white;
+    box-shadow: 0 4px 12px rgba(245, 166, 35, 0.3);
+}
+
+.landing-page .btn-primary:hover {
+    background-color: #e6951e; /* Cam đậm hơn */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(245, 166, 35, 0.4);
+}
+
+.landing-page .btn-secondary {
+    background-color: transparent;
+    color: #f5a623; /* Đổi sang màu cam */
+    border: 2px solid #f5a623;
+}
+
+.landing-page .btn-secondary:hover {
+    background-color: rgba(245, 166, 35, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Hero section */
+.landing-page .hero {
+    background: linear-gradient(120deg, #f5a623, #ffffff); /* Đổi gradient sang tông cam và trắng */
+    color: #2c3e50;
+    padding: 100px 0 120px;
+    position: relative;
+    overflow: hidden;
+}
+
+.landing-page .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+    background-size: 100% 100%;
+}
+
+.landing-page .hero-content {
+    max-width: 600px;
+    position: relative;
+    z-index: 1;
+}
+
+.landing-page .hero h1,
+.landing-page .hero p {
+    color: #2c3e50; /* Đổi màu chữ để phù hợp với nền */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.landing-page .hero-buttons {
+    margin-top: 2rem;
+}
+
+.landing-page .hero .btn-secondary {
+    background-color: transparent;
+    color: #2c3e50;
+    border: 2px solid #2c3e50;
+}
+
+.landing-page .hero .btn-secondary:hover {
+    background-color: rgba(44, 62, 80, 0.1);
+}
+
+/* Features section */
+.landing-page .features {
+    background-color: white;
+    padding: 100px 0;
+}
+
+.landing-page .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.landing-page .feature-card {
+    display: flex;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.landing-page .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.landing-page .feature-icon {
+    flex: 0 0 60px;
+    font-size: 2rem;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f5a623; /* Đổi sang màu cam */
+}
+
+.landing-page .feature-content {
+    flex: 1;
+}
+
+.landing-page .features-cta {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Benefits section */
+.landing-page .benefits {
+    background-color: #f8f9fa;
+    padding: 80px 0;
+}
+
+.landing-page .benefits-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.landing-page .benefit-item {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.landing-page .benefit-item:hover {
+    transform: translateX(10px);
+}
+
+.landing-page .benefit-icon {
+    flex: 0 0 40px;
+    height: 40px;
+    background-color: #f5a623; /* Đổi sang màu cam */
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    font-weight: bold;
+}
+
+.landing-page .benefit-text {
+    flex: 1;
+    font-size: 1.1rem;
+}
+
+/* CTA section */
+.landing-page .cta {
+    background: linear-gradient(120deg, #ffffff, #f5a623); /* Đổi gradient sang tông cam và trắng */
+    color: #2c3e50;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.landing-page .cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.landing-page .cta h2,
+.landing-page .cta p {
+    color: #2c3e50;
+}
+
+.landing-page .cta-buttons {
+    margin-top: 30px;
+}
+
+.landing-page .cta .btn-secondary {
+    background-color: transparent;
+    color: #2c3e50;
+    border: 2px solid #2c3e50;
+}
+
+/* Footer */
+.landing-page .footer {
+    background-color: #2c3e50;
+    padding: 60px 0 40px;
+    color: white;
+}
+
+.landing-page .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.landing-page .footer-branding {
+    margin-bottom: 20px;
+}
+
+.landing-page .footer-branding h3 {
+    color: white;
+    font-size: 1.8rem;
+}
+
+.landing-page .footer-contact p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 8px;
+}
+
+.landing-page .social-links {
+    margin-top: 30px;
+}
+
+.landing-page .social-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.landing-page .social-links a:hover {
+    color: #f5a623; /* Đổi sang màu cam */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .landing-page h1 {
+        font-size: 2.2rem;
+    }
+
+    .landing-page h2 {
+        font-size: 1.8rem;
+    }
+
+    .landing-page .hero {
+        padding: 80px 0;
+    }
+
+    .landing-page .feature-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .landing-page .feature-icon {
+        margin: 0 auto 20px;
+    }
+
+    .landing-page section {
+        padding: 60px 0;
+    }
+
+    .landing-page .benefit-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .landing-page .benefit-icon {
+        margin: 0 auto 15px;
+    }
+}

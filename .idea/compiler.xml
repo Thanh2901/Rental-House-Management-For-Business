@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="discovery-service" />
+        <module name="gateway-service" />
+        <module name="config-service" />
+      </profile>
+      <profile name="Annotation profile for data-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.m2/repository/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
+          <entry name="$USER_HOME$/.m2/repository/org/mapstruct/mapstruct/1.5.5.Final/mapstruct-1.5.5.Final.jar" />
+          <entry name="$USER_HOME$/.m2/repository/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
+          <entry name="$USER_HOME$/.m2/repository/org/projectlombok/lombok-mapstruct-binding/0.2.0/lombok-mapstruct-binding-0.2.0.jar" />
+        </processorPath>
+        <module name="data-service" />
+      </profile>
+      <profile name="Annotation profile for asset-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.m2/repository/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+          <entry name="$USER_HOME$/.m2/repository/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="asset-service" />
+      </profile>
+      <profile name="Annotation profile for config-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.m2/repository/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
+        </processorPath>
+        <module name="report-service" />
+        <module name="auth-service" />
+        <module name="notification-service" />
+        <module name="finance-service" />
+      </profile>
+      <profile name="Annotation profile for fee-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.m2/repository/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+          <entry name="$USER_HOME$/.m2/repository/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
+          <entry name="$USER_HOME$/.m2/repository/org/mapstruct/mapstruct/1.5.5.Final/mapstruct-1.5.5.Final.jar" />
+          <entry name="$USER_HOME$/.m2/repository/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
+          <entry name="$USER_HOME$/.m2/repository/org/projectlombok/lombok-mapstruct-binding/0.2.0/lombok-mapstruct-binding-0.2.0.jar" />
+        </processorPath>
+        <module name="fee-service" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="asset-service" options="-parameters" />
+      <module name="auth-service" options="-parameters" />
+      <module name="config-service" options="-parameters" />
+      <module name="data-service" options="-parameters" />
+      <module name="discovery-service" options="-parameters" />
+      <module name="fee-service" options="-parameters" />
+      <module name="finance-service" options="-parameters" />
+      <module name="gateway-service" options="-parameters" />
+      <module name="notification-service" options="-parameters" />
+      <module name="report-service" options="-parameters" />
+    </option>
+  </component>
+</project>

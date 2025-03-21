@@ -1,0 +1,96 @@
+/* ✅ Container chính */
+.room-result {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Tự động fit số cột */
+    gap: 20px;
+    padding: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ✅ Item mỗi phòng */
+.room-list-item {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ✅ Hiệu ứng hover */
+.room-list-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ✅ Hình ảnh phòng */
+.room-list-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 3px solid #E0A580;
+}
+
+/* ✅ Thông tin phòng */
+.room-list-item div {
+    padding: 15px;
+}
+
+.room-list-item h3 {
+    font-size: 18px;
+    color: #5C4033;
+    margin-bottom: 5px;
+}
+
+.room-list-item p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* ✅ Container chứa nút */
+.book-now-div {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+
+/* ✅ Nút Book Now / Edit Room */
+.book-now-button, .edit-room-button {
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* ✅ Nút Book Now */
+.book-now-button {
+    background: #D89067;
+    color: #fff;
+}
+
+.book-now-button:hover {
+    background: #C77952;
+    transform: scale(1.05);
+}
+
+/* ✅ Nút Edit Room */
+.edit-room-button {
+    background: #556B2F; /* Màu xanh lá nhẹ */
+    color: #fff;
+}
+
+.edit-room-button:hover {
+    background: #4A5F23;
+    transform: scale(1.05);
+}
+
+/* ✅ Responsive: Hiển thị 1 cột trên màn hình nhỏ */
+@media (max-width: 768px) {
+    .room-result {
+        grid-template-columns: 1fr;
+    }
+}

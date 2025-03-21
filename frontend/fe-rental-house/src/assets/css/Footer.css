@@ -1,0 +1,9 @@
+.my-footer {
+    background-color: #000; /* Đen hoàn toàn */
+    color: #ffffff; /* Chữ trắng nổi bật */
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600; /* Đậm hơn để dễ đọc */
+    width: 100%;
+}

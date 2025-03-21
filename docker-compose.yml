@@ -1,0 +1,103 @@
+services:
+  data-db:
+    image: postgres:15
+    container_name: data-db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: data-service
+    ports:
+      - "1234:5432"
+    volumes:
+      - data-data:/var/lib/postgresql/data
+
+  asset-db:
+    image: postgres:15
+    container_name: asset-db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: asset-service
+    ports:
+      - "2345:5432"
+    volumes:
+      - asset-data:/var/lib/postgresql/data
+
+  finance-db:
+    image: postgres:15
+    container_name: finance-db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: finance-service
+    ports:
+      - "3456:5432"
+    volumes:
+      - finance-data:/var/lib/postgresql/data
+
+  fee-db:
+    image: postgres:15
+    container_name: fee-db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: fee-service
+    ports:
+      - "4567:5432"
+    volumes:
+      - fee-data:/var/lib/postgresql/data
+
+  notification-db:
+    image: postgres:15
+    container_name: notification-db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: notification-service
+    ports:
+      - "5678:5432"
+    volumes:
+      - notification-data:/var/lib/postgresql/data
+
+  report-db:
+    image: postgres:15
+    container_name: report-db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: report-service
+    ports:
+      - "6789:5432"
+    volumes:
+      - report-data:/var/lib/postgresql/data
+
+  auth-db:
+    image: postgres:15
+    container_name: auth-db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: auth-service
+    ports:
+      - "6799:5432"
+    volumes:
+      - auth-data:/var/lib/postgresql/data
+
+volumes:
+  data-data:
+  asset-data:
+  finance-data:
+  fee-data:
+  notification-data:
+  report-data:
+  auth-data:
+
+
+

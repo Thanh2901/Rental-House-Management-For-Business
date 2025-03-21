@@ -1,0 +1,180 @@
+/* Container chính của trang UserProfile */
+.user-profile-container {
+    padding: 40px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+}
+
+/* Tiêu đề chính */
+.user-profile-container .user-profile-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #f4a261;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Phần chi tiết người dùng */
+.user-profile-container .user-profile-details {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Tiêu đề phụ */
+.user-profile-container .user-profile-subtitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Thông tin người dùng dưới dạng form */
+.user-profile-container .user-profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Form group */
+.user-profile-container .form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Label trong form group */
+.user-profile-container .form-group label {
+    width: 40%;
+    font-size: 16px;
+    color: #f4a261;
+    font-weight: 600;
+    text-align: right;
+}
+
+/* Input trong form */
+.user-profile-container .form-input {
+    width: 60%;
+    padding: 8px 12px;
+    font-size: 16px;
+    color: #555;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.user-profile-container .form-input:focus {
+    border-color: #f4a261;
+    box-shadow: 0 0 5px rgba(244, 162, 97, 0.3);
+}
+
+/* Nút cập nhật */
+.user-profile-container .submit-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #f4a261;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.user-profile-container .submit-button:hover {
+    background-color: #e07a5f;
+}
+
+.user-profile-container .submit-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Trạng thái đang tải */
+.user-profile-container .loading {
+    font-size: 18px;
+    color: #666;
+    text-align: center;
+    padding: 50px 0;
+}
+
+/* Thông báo lỗi */
+.user-profile-container .error {
+    font-size: 18px;
+    color: #dc3545;
+    text-align: center;
+    padding: 50px 0;
+    font-weight: 500;
+}
+
+/* Thông báo không có dữ liệu */
+.user-profile-container .no-data {
+    font-size: 16px;
+    color: #888;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .user-profile-container {
+        padding: 20px 15px;
+        max-width: 100%;
+    }
+
+    .user-profile-container .user-profile-title {
+        font-size: 24px;
+    }
+
+    .user-profile-container .user-profile-subtitle {
+        font-size: 18px;
+    }
+
+    .user-profile-container .form-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .user-profile-container .form-group label {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 5px;
+    }
+
+    .user-profile-container .form-input {
+        width: 100%;
+    }
+
+    .user-profile-container .submit-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .user-profile-container .user-profile-title {
+        font-size: 20px;
+    }
+
+    .user-profile-container .user-profile-subtitle {
+        font-size: 16px;
+    }
+
+    .user-profile-container .user-profile-details {
+        padding: 15px;
+    }
+
+    .user-profile-container .form-input {
+        font-size: 14px;
+    }
+
+    .user-profile-container .submit-button {
+        font-size: 14px;
+    }
+}
