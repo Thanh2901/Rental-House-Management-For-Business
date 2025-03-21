@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(name = "data-service", url = "http://localhost:9007")
 public interface UserClient {
-    @PostMapping("/api/users/registration")
+    @PostMapping("/api/data/users/registration")
     ApiResponse<UserResponse> registerUser(@RequestBody RegisterUserRequest registerUserRequest);
 
-    @GetMapping("/api/users/{credentialId}")
+    @GetMapping("/api/data/users/{credentialId}")
     ApiResponse<UserResponse> getUser(@PathVariable("credentialId") String credentialId);
 }

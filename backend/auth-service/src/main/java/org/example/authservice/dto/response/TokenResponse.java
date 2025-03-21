@@ -1,11 +1,14 @@
 package org.example.authservice.dto.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import org.example.authservice.entity.Credential;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class TokenResponse {
     private String accessToken;
     private String refreshToken;

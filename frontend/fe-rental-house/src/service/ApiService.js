@@ -2,7 +2,7 @@ import axios from "axios";
 import CryptoJS from "crypto-js";
 
 export default class ApiService {
-    static BASE_URL = "http://localhost:9008/api"; // URL cơ sở của API
+    static BASE_URL = "http://localhost:9090/api"; // URL cơ sở của API
     static ENCRYPTION_KEY = "dennis-secrete-key"; // Khóa mã hóa
 
     // Mã hóa dữ liệu bằng CryptoJS
