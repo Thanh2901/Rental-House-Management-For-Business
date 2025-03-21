@@ -1,16 +1,16 @@
 package org.example.authservice.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang.StringUtils;
 import org.example.authservice.dto.ApiResponse;
-import org.example.authservice.dto.CredentialDTO;
 import org.example.authservice.dto.request.LoginRequest;
 import org.example.authservice.dto.request.RegistrationRequest;
 import org.example.authservice.dto.request.ResetPasswordDTO;
 import org.example.authservice.dto.response.TokenResponse;
 import org.example.authservice.dto.response.UserResponse;
 import org.example.authservice.service.AuthenticationService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

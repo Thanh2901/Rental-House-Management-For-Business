@@ -17,12 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/rooms")
+@RequestMapping("/api/data/rooms")
 @RequiredArgsConstructor
 public class RoomController {
 
