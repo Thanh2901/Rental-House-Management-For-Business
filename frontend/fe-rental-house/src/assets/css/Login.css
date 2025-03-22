@@ -9,8 +9,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: #ffffff; /* Gradient background */
+    min-height: 82vh;
+    background-image:   url("../public/images/bg-2.avif"); /* Gradient background */
+    background-size: "cover";
+    background-position: center; 
+    background-repeat: "no-repeat";
 }
 
 /* Container của form */
@@ -34,17 +37,23 @@
 
 /* Form group */
 .login-page-wrapper .form-group {
-    margin-bottom: 20px;
-    text-align: left; /* Align labels to the left */
+    width: 100%; /* Chiếm khoảng một nửa của form, có gap ở giữa */
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
 }
 
 /* Label */
-.login-page-wrapper .form-group label {
-    display: block;
-    margin-bottom: 8px;
+.login-page-wrapper .form-group label  {
     font-size: 14px;
-    font-weight: 500;
-    color: #000000; /* Black text */
+    color: #4A3F35;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+    transition: color 0.3s;
+}
+.login-page-wrapper .form-group:hover label {
+    color: #b65d1e;
 }
 
 /* Input */
@@ -57,7 +66,13 @@
     background-color: #ffffff; /* White background */
     box-sizing: border-box;
 }
-
+.login-page-wrapper .form-group input:focus {
+    border-color: #b65d1e;
+    box-shadow: 0 0 10px rgba(255, 87, 51, 0.3);
+    outline: none;
+    background-color: #fff;
+    transform: scale(1.02);
+}
 .login-page-wrapper .form-group input::placeholder {
     color: #b0b0b0; /* Light gray placeholder text */
 }
@@ -118,7 +133,12 @@
 
 /* Links */
 .login-page-wrapper .links {
+    width: 100%;
+    display: flex;
     margin-top: 15px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .login-page-wrapper .forgot-password-link,
@@ -129,17 +149,37 @@
 }
 
 .login-page-wrapper .forgot-password-link a,
-.login-page-wrapper .register-link a {
-    color: #3498db; /* Blue links */
+.login-page-wrapper .register-link a  {
+    color: #d66d48;
+    font-weight: bold;
     text-decoration: none;
-    font-weight: 500;
+    position: relative;
+    padding-bottom: 2px;
+    transition: all 0.3s ease;
 }
+
+.login-page-wrapper .forgot-password-link a::after,
+.login-page-wrapper .register-link a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #b33c1f;
+    transition: width 0.3s ease;
+}
+
 
 .login-page-wrapper .forgot-password-link a:hover,
 .login-page-wrapper .register-link a:hover {
-    text-decoration: underline;
-    color: #2980b9;
+    color: #b33c1f;
 }
+
+.login-page-wrapper .forgot-password-link a:hover::after,
+.login-page-wrapper .register-link a:hover::after {
+    width: 100%;
+} 
 
 /* Thêm vào phần cuối file Navbar.css */
 

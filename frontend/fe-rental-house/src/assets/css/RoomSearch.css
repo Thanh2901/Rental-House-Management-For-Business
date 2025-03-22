@@ -7,8 +7,8 @@
     flex-direction: column;
     align-items: center;
     gap: 16px;
-    width: 85%;  /* Rộng hơn, phù hợp với layout */
-    max-width: 900px;
+    width: 25%;  /* Rộng hơn, phù hợp với layout */
+    /* max-width: 900px; */
     margin: 20px auto;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng nổi nhẹ */
 }
@@ -20,17 +20,13 @@
     justify-content: space-between;
     gap: 12px;
     width: 100%;
-    background: white;
     padding: 16px;
     border-radius: 8px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* 🔹 Cập nhật input và dropdown */
 .search-field {
-    flex: 1;
     display: flex;
-    flex-direction: column;
 }
 
 .search-field label {

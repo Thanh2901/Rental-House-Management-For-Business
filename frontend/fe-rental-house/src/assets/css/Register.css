@@ -1,137 +1,296 @@
-/* ✅ Container chính của form */
-/* ✅ Thêm hiệu ứng xuất hiện */
+/* Container chính của form với hiệu ứng xuất hiện */
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(50px); /* Bắt đầu từ dưới */
+        transform: translateY(50px);
     }
     to {
         opacity: 1;
-        transform: translateY(0); /* Di chuyển về vị trí ban đầu */
+        transform: translateY(0);
+    }
+}
+.container{
+    display: flex;
+    min-height: 82vh;
+    width: 100%;
+    background-image: url("../public/images/bg-2.avif");
+    background-size: "cover";
+    background-position: center; 
+    background-repeat: "no-repeat";
+    justify-content: center;
+    align-items: center;
+}
+.auth-container {
+    width: 100%;
+    max-width: 600px; /* Tăng chiều rộng để vừa các input trên cùng dòng */
+    /* margin: 50px auto; */
+    padding: 30px;  
+    /* background: linear-gradient(135deg, #ffecd2, #fcb69f); */
+    background: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    text-align: center;
+    animation: fadeInUp 0.8s ease-out forwards;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hiệu ứng ánh sáng nhẹ phía trên form */
+.auth-container::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    filter: blur(5px);
+}
+
+/* Tiêu đề với hiệu ứng text-shadow */
+.auth-container h2 {
+    color: #3D3027;
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
+    position: relative;
+}
+
+/* Đường gạch chân cho tiêu đề */
+.auth-container h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #D77A61, transparent);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* Flex container cho form */
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* Form Group với hiệu ứng khi hover - giờ trên một dòng */
+.form-group {
+    width: 48%; /* Chiếm khoảng một nửa của form, có gap ở giữa */
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+/* Form group trên mobile sẽ chiếm 100% chiều rộng */
+@media (max-width: 600px) {
+    .form-group {
+        width: 100%;
     }
 }
 
-/* ✅ Container chính của form */
-.auth-container {
-    width: 100%;
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 30px;
-    background: linear-gradient(135deg, #ffecd2, #fcb69f); /* Gradient cam pastel */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    text-align: center;
-
-    /* 👇 Thêm hiệu ứng khi xuất hiện */
-    opacity: 0; /* Ẩn ban đầu */
-    animation: fadeInUp 0.8s ease-out forwards;
+.form-group:hover {
+    transform: translateX(3px);
 }
 
-/*.auth-container {*/
-/*    width: 100%;*/
-/*    max-width: 400px;*/
-/*    margin: 50px auto;*/
-/*    padding: 30px;*/
-/*    background: linear-gradient(135deg, #ffecd2, #fcb69f); !* Gradient cam pastel *!*/
-/*    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);*/
-/*    border-radius: 10px;*/
-/*    text-align: center;*/
-/*}*/
-
-/* ✅ Tiêu đề */
-.auth-container h2 {
-    color: #4A3F35; /* Nâu đất */
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: 700;
-}
-
-/* ✅ Form Group */
-.form-group {
-    text-align: left;
-    margin-bottom: 15px;
-}
-
-/* ✅ Label */
+/* Label với font đẹp hơn */
 .form-group label {
     font-size: 14px;
-    color: #5a4a42;
+    color: #4A3F35;
     font-weight: 600;
     display: block;
     margin-bottom: 5px;
+    text-align: left;
+    transition: color 0.3s;
 }
 
-/* ✅ Input Fields */
+.form-group:hover label {
+    color: #b65d1e;
+}
+
+/* Input Fields với animation */
 .form-group input {
     width: 100%;
     padding: 12px;
-    font-size: 16px;
-    border-radius: 6px;
-    border: 1px solid #d4af37; /* Vàng gold */
-    background-color: #fff;
+    font-size: 15px;
+    border-radius: 8px;
+    border: 2px solid rgba(212, 175, 55, 0.5);
+    background-color: rgba(255, 255, 255, 0.9);
     transition: all 0.3s ease;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* ✅ Input focus */
+/* Input focus với hiệu ứng đẹp hơn */
 .form-group input:focus {
-    border-color: #ff5733; /* Cam cháy */
-    box-shadow: 0 0 8px rgba(255, 87, 51, 0.3);
+    border-color: #ff5733;
+    box-shadow: 0 0 10px rgba(255, 87, 51, 0.4);
     outline: none;
+    background-color: #fff;
+    transform: scale(1.02);
 }
 
-/* ✅ Nút đăng ký */
+/* Nút đăng ký với hiệu ứng - width 100% để nằm trên dòng riêng và rõ ràng */
 button[type="submit"] {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     font-size: 18px;
     font-weight: bold;
     color: white;
-    background-color: #D77A61; /* Cam đất */
+    background: linear-gradient(to right, #D77A61, #e78b70);
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(215, 122, 97, 0.3);
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
 }
 
-/* ✅ Hover nút */
+/* Hiệu ứng hover cho nút */
 button[type="submit"]:hover {
-    background-color: #b65d1e; /* Cam đậm hơn */
+    background: linear-gradient(to right, #c56c54, #d67c61);
+    box-shadow: 0 6px 15px rgba(182, 93, 30, 0.4);
+    transform: translateY(-2px);
 }
 
-/* ✅ Link chuyển sang Login */
+/* Hiệu ứng khi click nút */
+button[type="submit"]:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(182, 93, 30, 0.4);
+}
+
+/* Hiệu ứng gợn sóng khi click */
+button[type="submit"]::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+button[type="submit"]:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(100, 100);
+        opacity: 0;
+    }
+}
+
+/* Link chuyển sang Login với hiệu ứng */
 .register-link {
     margin-top: 15px;
-    font-size: 14px;
+    font-size: 15px;
+    color: #5a4a42;
 }
 
 .register-link a {
     color: #d66d48;
     font-weight: bold;
     text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
     transition: all 0.3s ease;
 }
 
-.register-link a:hover {
-    color: #b33c1f; /* Cam đậm hơn */
+/* Hiệu ứng underline khi hover vào link */
+.register-link a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #b33c1f;
+    transition: width 0.3s ease;
 }
 
-/* ✅ Thông báo lỗi hoặc thành công */
-.success-message {
-    color: #2d882d;
+.register-link a:hover {
+    color: #b33c1f;
+}
+
+.register-link a:hover::after {
+    width: 100%;
+}
+
+/* Thông báo lỗi hoặc thành công với animation */
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.success-message, .error-message {
+    padding: 10px 15px;
+    border-radius: 6px;
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    animation: slideDown 0.5s ease-out forwards;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.success-message {
+    color: #155724;
+    background-color: rgba(212, 237, 218, 0.9);
+    border-left: 4px solid #28a745;
 }
 
 .error-message {
-    color: #d63031;
-    font-weight: bold;
-    margin-bottom: 15px;
+    color: #721c24;
+    background-color: rgba(248, 215, 218, 0.9);
+    border-left: 4px solid #dc3545;
 }
 
-/* ✅ Responsive */
+/* Responsive UI */
 @media (max-width: 480px) {
     .auth-container {
-        width: 90%;
-        padding: 20px;
+        width: 92%;
+        padding: 25px 15px;
+        margin: 30px auto;
     }
+    
+    .auth-container h2 {
+        font-size: 24px;
+    }
+    
+    .form-group input {
+        padding: 10px;
+    }
+    
+    button[type="submit"] {
+        padding: 12px;
+    }
+}
+
+/* Hiệu ứng cho tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+    .auth-container {
+        max-width: 550px;
+    }
+}
+
+/* Tạo các trường đầu vào dài hơn cho email và password */
+.form-group[key="email"], .form-group[key="password"] {
+    width: 100%;
 }
