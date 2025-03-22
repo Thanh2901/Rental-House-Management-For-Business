@@ -18,9 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -126,11 +128,11 @@ public class RoomServiceImpl implements RoomService {
         if (endDate.isBefore(startDate)) {
             throw new InvalidBookingException("end date can not before start date");
         }
-        if (endDate.isAfter(LocalDate.now())) {
-            throw new InvalidBookingException("end date can not after today");
+        if (endDate.isBefore(LocalDate.now())) {
+            throw new InvalidBookingException("end date can not before today");
         }
 
-        List<RoomDTO> roomDTOList = roomRepository.findAvailableRooms(startDate, endDate, roomType.toString())
+        List<RoomDTO> roomDTOList = roomRepository.findAvailableRooms(startDate, endDate, roomType)
                 .stream().map(roomMapper::toRoomDTO).toList();
 
         return Response.builder()
@@ -141,8 +143,11 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<RoomType> getAllRoomTypes() {
-        return roomRepository.getAllRoomTypes();
+    public List<String> getAllRoomTypes() {
+        List<String> roomTypes = Arrays.stream(RoomType.values())
+                .map(Enum::name) // Returns "SINGLE", "DOUBLE", "SUITE"
+                .collect(Collectors.toList());
+        return roomTypes;
     }
 
     @Override

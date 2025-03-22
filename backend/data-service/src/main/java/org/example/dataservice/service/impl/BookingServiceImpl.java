@@ -3,20 +3,21 @@ package org.example.dataservice.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dataservice.client.NotificationClient;
-import org.example.dataservice.client.UserClient;
 import org.example.dataservice.dto.BookingDTO;
 import org.example.dataservice.dto.NotificationDTO;
 import org.example.dataservice.dto.Response;
+import org.example.dataservice.dto.response.UserResponse;
 import org.example.dataservice.entity.Booking;
 import org.example.dataservice.entity.Room;
-import org.example.dataservice.entity.User;
 import org.example.dataservice.exception.InvalidBookingException;
 import org.example.dataservice.exception.NotFoundException;
 import org.example.dataservice.mapper.BookingMapper;
 import org.example.dataservice.repository.BookingRepository;
 import org.example.dataservice.repository.RoomRepository;
+import org.example.dataservice.repository.UserRepository;
 import org.example.dataservice.service.BookingCodeGenerator;
 import org.example.dataservice.service.BookingService;
+import org.example.dataservice.service.UserService;
 import org.example.dataservice.util.BookingStatus;
 import org.example.dataservice.util.PaymentStatus;
 import org.springframework.data.domain.Sort;
@@ -34,14 +35,16 @@ import java.util.List;
 public class BookingServiceImpl implements BookingService {
     private final NotificationClient notificationClient;
     private final RoomRepository roomRepository;
-    private final UserClient userClient;
     private final BookingCodeGenerator bookingCodeGenerator;
     private final BookingMapper bookingMapper;
     private final BookingRepository bookingRepository;
+    private final UserRepository userRepository;
 
     @Override
-    public Response createBooking(BookingDTO bookingDTO) {
-        User currentUser = userClient.getCurrentLoggedInUser();
+    public Response createBooking(BookingDTO bookingDTO, String credentialId) {
+
+        var currentUser = userRepository.findByCredentialId(credentialId).orElseThrow(()->new NotFoundException("user not found"));
+
         Room room = roomRepository.findById(bookingDTO.getId())
                 .orElseThrow(()-> new NotFoundException("Room not found"));
         // validate
@@ -114,8 +117,8 @@ public class BookingServiceImpl implements BookingService {
                 map(bookingMapper::toBookingDTO).
                 toList();
         for (BookingDTO bookingDTO : bookingDTOList) {
-            bookingDTO.setUser(null);
-            bookingDTO.setRoom(null);
+            bookingDTO.setUserId(null);
+            bookingDTO.setRoomId(null);
         }
         return Response.builder()
                 .status(200)

@@ -1,4 +1,23 @@
-/* Reset default styles within the user-profile-page */
+/* Định nghĩa biến CSS toàn cục */
+:root {
+    --primary-color: #ff6f61;
+    --primary-hover: #e65b50;
+    --secondary-color: #333;
+    --text-gray: #666;
+    --light-bg: #fff;
+    --form-bg: #f9f9f9;
+    --border-color: #ccc;
+    --border-light: #dee2e6;
+    --shadow-sm: 0 0 5px rgba(0, 123, 255, 0.3);
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --transition: all 0.3s ease;
+    --focus-color: #007bff;
+    --error-color: #dc3545;
+    --disabled-color: #cccccc;
+}
+
+/* Reset default styles */
 .user-profile-page * {
     margin: 0;
     padding: 0;
@@ -11,160 +30,161 @@
 }
 
 /* Main layout */
-.user-profile-page .main-layout {
+.main-layout {
     display: flex;
-    min-height: 100vh; /* Full viewport height */
+    min-height: 100vh;
 }
 
 /* Sidebar */
-.user-profile-page .sidebar {
+.sidebar {
     width: 300px;
     background-color: #f1f1f1;
     padding: 10px;
-    border-right: 1px solid #dee2e6;
+    border-right: 1px solid var(--border-light);
 }
 
-.user-profile-page .sidebar h2 {
+.sidebar h2 {
     font-size: 20px;
     font-weight: 900;
     margin-top: 30px;
     margin-bottom: 50px;
-    color: #333;
+    color: var(--secondary-color);
     text-align: center;
     text-transform: uppercase;
 }
 
-.user-profile-page .sidebar ul {
+.sidebar ul {
     list-style: none;
 }
 
-.user-profile-page .sidebar ul li {
+.sidebar ul li {
     margin-bottom: 20px;
 }
 
-.user-profile-page .sidebar ul li a {
+.sidebar ul li a {
     display: block;
     padding: 12px;
     text-decoration: none;
-    color: #333;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    transition: background-color 0.3s;
+    color: var(--secondary-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background-color: var(--light-bg);
+    transition: var(--transition);
     font-size: 16px;
     line-height: 1.5;
 }
 
-.user-profile-page .sidebar ul li a:hover {
+.sidebar ul li a:hover {
     background-color: #e9ecef;
 }
 
 /* Main content */
-.user-profile-page .main-content {
+.main-content {
     flex: 1;
-    padding: 15px; /* Reduced padding from 30px to 15px to move the form closer to the top */
-    background-color: #fff;
+    padding: 15px;
+    background-color: var(--light-bg);
     display: flex;
-    justify-content: center; /* Center the form horizontally */
-    align-items: flex-start; /* Changed from center to flex-start to align the form to the top */
+    justify-content: center;
+    align-items: flex-start;
 }
 
-.user-profile-page .user-profile-container {
+.user-profile-container {
     max-width: 900px;
     width: 100%;
     margin: 0 auto;
 }
 
-.user-profile-page .user-profile-title {
+.user-profile-title {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #333;
+    color: var(--secondary-color);
     text-align: center;
 }
 
-.user-profile-page .user-profile-details {
-    background-color: #f9f9f9;
+.user-profile-details {
+    background-color: var(--form-bg);
     padding: 30px;
-    border-radius: 8px;
-    border: 1px solid #dee2e6;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
 }
 
-.user-profile-page .user-profile-subtitle {
+.user-profile-subtitle {
     font-size: 22px;
     margin-bottom: 20px;
-    color: #333;
+    color: var(--secondary-color);
 }
 
-.user-profile-page .user-profile-info {
+.user-profile-info {
     display: grid;
     gap: 20px;
 }
 
-.user-profile-page .form-group {
+.form-group {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.user-profile-page .form-group label {
+.form-group label {
     width: 180px;
     font-size: 18px;
-    color: #333;
+    color: var(--secondary-color);
 }
 
-.user-profile-page .form-input {
+.form-input {
     flex: 1;
     padding: 12px;
     font-size: 18px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
     outline: none;
     min-width: 400px;
+    transition: var(--transition);
 }
 
-.user-profile-page .form-input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+.form-input:focus {
+    border-color: var(--focus-color);
+    box-shadow: var(--shadow-sm);
 }
 
-.user-profile-page .submit-button {
+.submit-button {
     display: block;
     width: 250px;
     margin: 30px auto 0;
     padding: 12px;
-    background-color: #ff6f61;
-    color: #fff;
+    background-color: var(--primary-color);
+    color: var(--light-bg);
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     font-size: 18px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: var(--transition);
 }
 
-.user-profile-page .submit-button:hover {
-    background-color: #e65b50;
+.submit-button:hover {
+    background-color: var(--primary-hover);
 }
 
-.user-profile-page .submit-button:disabled {
-    background-color: #cccccc;
+.submit-button:disabled {
+    background-color: var(--disabled-color);
     cursor: not-allowed;
 }
 
 /* Loading and error states */
-.user-profile-page .loading,
-.user-profile-page .error {
+.loading,
+.error {
     text-align: center;
     padding: 20px;
     font-size: 16px;
-    color: #333;
+    color: var(--secondary-color);
 }
 
-.user-profile-page .error {
-    color: #dc3545;
+.error {
+    color: var(--error-color);
 }
 
-.user-profile-page .no-data {
+.no-data {
     text-align: center;
     font-size: 16px;
-    color: #666;
+    color: var(--text-gray);
 }

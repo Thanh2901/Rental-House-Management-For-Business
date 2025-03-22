@@ -1,5 +1,6 @@
 package org.example.dataservice.controller;
 
+import jakarta.ws.rs.HeaderParam;
 import lombok.RequiredArgsConstructor;
 import org.example.dataservice.dto.BookingDTO;
 import org.example.dataservice.dto.Response;
@@ -22,8 +23,8 @@ public class BookingController {
 
     @PostMapping
 //    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
-    public ResponseEntity<Response> addBooking(@RequestBody BookingDTO bookingDTO) {
-        return new ResponseEntity<>(bookingService.createBooking(bookingDTO), HttpStatus.OK);
+    public ResponseEntity<Response> addBooking(@RequestBody BookingDTO bookingDTO, @RequestHeader("X-Credential") String credential) {
+        return new ResponseEntity<>(bookingService.createBooking(bookingDTO, credential), HttpStatus.OK);
     }
 
     @GetMapping("/{reference}")

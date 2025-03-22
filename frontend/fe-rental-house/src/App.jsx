@@ -13,6 +13,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UserProfile from "./component/profile/UserProfile.jsx";
 import LandingPage from "./component/landing/LandingPage.jsx";
+import AllRoomPage from "./component/booking_rooms/AllRoomPage.jsx";
+import RoomDetailsPage from "./component/booking_rooms/RoomDetailsPage.jsx";
 
 function App() {
     const [count, setCount] = useState(0);
@@ -33,6 +35,8 @@ function App() {
                         <Route path="/forgot-password" element={<ForgotPassword />} />
                         <Route path="/home" element={<HomePage />} />
                         <Route path="/profile" element={<UserProfile />} />
+                        <Route path="/rooms" element={<AllRoomPage/>}/>
+                        <Route path={"/room-details/:roomId"} element={<RoomDetailsPage/>}/>
                     </Routes>
                 </div>
                 <Footer />

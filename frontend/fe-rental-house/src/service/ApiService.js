@@ -267,4 +267,125 @@ export default class ApiService {
         const role = this.getRole();
         return role === "USER";
     }
+
+    // Lấy tất cả các phòng bằng /api/data/rooms/all
+    static async getAllRooms() {
+        try {
+            const resp = await axios.get(`${this.BASE_URL}/data/rooms/all`, {
+                headers: this.getHeader()
+            });
+            console.log("Phản hồi từ /api/data/rooms/all:", resp.data);
+
+            // Kiểm tra xem response có chứa mảng rooms không
+            if (resp.data && resp.data.rooms && Array.isArray(resp.data.rooms)) {
+                return resp.data.rooms; // Trả về mảng các phòng (RoomDTO)
+            } else {
+                throw new Error('Unexpected response format: "rooms" array not found');
+            }
+        } catch (error) {
+            console.error("Lỗi khi lấy danh sách phòng:", error.response?.data || error.message);
+            throw error;
+        }
+    }
+
+    // Lấy tất cả các loại phòng bằng /api/data/rooms/room-type
+    static async getRoomTypes() {
+        try {
+            const resp = await axios.get(`${this.BASE_URL}/data/rooms/room-type`, {
+                headers: this.getHeader()
+            });
+            console.log("Phản hồi từ /api/data/rooms/room-type:", resp.data);
+
+            // Kiểm tra xem response có phải là mảng không
+            if (Array.isArray(resp.data)) {
+                return resp.data; // Trả về mảng các loại phòng (e.g., ["SINGLE", "DOUBLE", "SUIT", "TRIPLE"])
+            } else {
+                throw new Error('Unexpected response format: Expected an array of room types');
+            }
+        } catch (error) {
+            console.error("Lỗi khi lấy danh sách loại phòng:", error.response?.data || error.message);
+            throw error;
+        }
+    }
+
+    static async getRoomById(roomId) {
+        try {
+            const resp = await axios.get(`${this.BASE_URL}/data/rooms/${roomId}`, {
+                headers: this.getHeader(),
+            });
+            console.log("Phản hồi từ /api/data/rooms/{roomId}:", resp.data);
+            if (resp.data && resp.data.room) {
+                return resp.data;
+            } else {
+                throw new Error("Unexpected response format: 'room' object not found");
+            }
+        } catch (error) {
+            console.error("Lỗi khi lấy chi tiết phòng:", error.response?.data || error.message);
+            throw error;
+        }
+    }
+
+    static async bookRoom(booking) {
+        try {
+            const resp = await axios.post(`${this.BASE_URL}/data/bookings`, booking, {
+                headers: this.getHeader(),
+            });
+            console.log("Phản hồi từ /api/data/bookings:", resp.data);
+            return resp.data;
+        } catch (error) {
+            console.error("Lỗi khi đặt phòng:", error.response?.data || error.message);
+            throw error;
+        }
+    }
+
+    // Fetch available rooms based on startDate, endDate, and roomType
+    // Fetch available rooms based on startDate, endDate, and roomType
+    static async getAvailableRoom(startDate, endDate, roomType) {
+        console.log("Sending roomType:", roomType);
+        try {
+            // Kiểm tra định dạng đầu vào
+            const validRoomTypes = ["SINGLE", "DOUBLE", "SUIT", "TRIPLE"];
+            if (!startDate || !endDate || !roomType) {
+                throw new Error("startDate, endDate, và roomType là bắt buộc");
+            }
+            if (!validRoomTypes.includes(roomType)) {
+                throw new Error(`roomType phải thuộc ${validRoomTypes.join(", ")}`);
+            }
+            // Đảm bảo startDate và endDate ở định dạng hợp lệ (ví dụ: YYYY-MM-DD)
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(startDate) || !/^\d{4}-\d{2}-\d{2}$/.test(endDate)) {
+                throw new Error("startDate và endDate phải ở định dạng YYYY-MM-DD");
+            }
+
+            // Tạo params với URLSearchParams để đảm bảo định dạng chính xác
+            const params = new URLSearchParams();
+            params.append('startDate', startDate);
+            params.append('endDate', endDate);
+            params.append('roomType', roomType.toString());
+
+            const resp = await axios.get(`${this.BASE_URL}/data/rooms/available`, {
+                headers: this.getHeader(),
+                params: params
+            });
+
+            console.log("Response from /api/data/rooms/available:", resp.data);
+
+            // Kiểm tra dữ liệu phản hồi
+            if (!resp.data || typeof resp.data !== "object") {
+                throw new Error("Phản hồi từ server không hợp lệ");
+            }
+
+            return {
+                status: resp.data.status || resp.status, // Lấy status từ body hoặc HTTP status
+                message: resp.data.message || "Success",
+                rooms: Array.isArray(resp.data.rooms) ? resp.data.rooms : [],
+            };
+        } catch (error) {
+            console.error("Error fetching available rooms:", error.response?.data || error.message);
+            throw {
+                status: error.response?.status || 500,
+                message: error.response?.data?.message || error.message || "Lỗi khi lấy danh sách phòng trống",
+                rooms: [],
+            };
+        }
+    }
 }

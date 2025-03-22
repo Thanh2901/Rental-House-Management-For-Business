@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import MockApiService from "../../service/MockApiService.js";
-import Flatpickr from "react-flatpickr"; // Import Flatpickr
-import "flatpickr/dist/flatpickr.min.css"; // Import CSS của Flatpickr
-import "../../assets/css/RoomSearch.css"; // Import CSS tùy chỉnh
+import ApiService from "../../service/ApiService.js";
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/flatpickr.min.css";
+import "../../assets/css/RoomSearch.css";
 
 const RoomSearch = ({ handleSearchResult }) => {
     const [startDate, setStartDate] = useState(null);
@@ -13,12 +13,14 @@ const RoomSearch = ({ handleSearchResult }) => {
 
     const containerRef = useRef(null);
 
-    // Fetch Room Types
+    // Fetch Room Types and transform to uppercase
     useEffect(() => {
         const fetchRoomTypes = async () => {
             try {
-                const types = await MockApiService.getRoomTypes();
-                setRoomTypes(types);
+                const types = await ApiService.getRoomTypes();
+                // Transform room types to uppercase to match backend enum
+                const formattedTypes = types.map(type => type.toUpperCase());
+                setRoomTypes(formattedTypes);
             } catch (error) {
                 console.log("Error fetching RoomTypes: " + error);
             }
@@ -42,15 +44,39 @@ const RoomSearch = ({ handleSearchResult }) => {
 
     // Handle Search
     const handleInternalSearch = async () => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Normalize today to start of day for comparison
+
+        // Validate all fields are selected
         if (!startDate || !endDate || !roomType) {
             showError("Please select all fields");
+            return;
+        }
+
+        // Validate startDate >= today
+        if (startDate < today) {
+            showError("Check-in date must be today or in the future");
+            return;
+        }
+
+        // Validate endDate > today
+        if (endDate <= today) {
+            showError("Check-out date must be in the future");
+            return;
+        }
+
+        // Validate startDate < endDate
+        if (startDate >= endDate) {
+            showError("Check-in date must be before check-out date");
             return;
         }
 
         try {
             const formattedStartDate = startDate ? new Date(startDate).toLocaleDateString("en-CA") : null;
             const formattedEndDate = endDate ? new Date(endDate).toLocaleDateString("en-CA") : null;
-            const resp = await MockApiService.getAvailableRoom(formattedStartDate, formattedEndDate, roomType);
+            // Ensure roomType is in uppercase (redundant if roomTypes are already transformed, but added for safety)
+            const formattedRoomType = roomType.toUpperCase();
+            const resp = await ApiService.getAvailableRoom(formattedStartDate, formattedEndDate, formattedRoomType);
 
             if (resp.status === 200) {
                 if (resp.rooms.length === 0) {
@@ -73,10 +99,11 @@ const RoomSearch = ({ handleSearchResult }) => {
                     <label>Check-in Date</label>
                     <Flatpickr
                         value={startDate}
-                        onChange={(date) => setStartDate(date[0])} // Flatpickr trả về mảng, lấy ngày đầu tiên
+                        onChange={(date) => setStartDate(date[0])}
                         options={{
-                            dateFormat: "Y-m-d", // Định dạng ngày
-                            minDate: "today", // Không cho phép chọn ngày trước hôm nay
+                            dateFormat: "Y-m-d",
+                            minDate: "today",
+                            maxDate: endDate ? new Date(endDate).setDate(new Date(endDate).getDate() - 1) : null,
                         }}
                         placeholder="Select Check-in Date"
                         className="date-input"
@@ -88,10 +115,12 @@ const RoomSearch = ({ handleSearchResult }) => {
                     <label>Check-out Date</label>
                     <Flatpickr
                         value={endDate}
-                        onChange={(date) => setEndDate(date[0])} // Flatpickr trả về mảng, lấy ngày đầu tiên
+                        onChange={(date) => setEndDate(date[0])}
                         options={{
-                            dateFormat: "Y-m-d", // Định dạng ngày
-                            minDate: startDate ? new Date(startDate).setDate(new Date(startDate).getDate() + 1) : "today", // Ngày check-out phải sau ngày check-in
+                            dateFormat: "Y-m-d",
+                            minDate: startDate
+                                ? new Date(startDate).setDate(new Date(startDate).getDate() + 1)
+                                : new Date().setDate(new Date().getDate() + 1),
                         }}
                         placeholder="Select Check-out Date"
                         className="date-input"
