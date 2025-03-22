@@ -1,8 +1,8 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import RoomResult from "../common/RoomResult.jsx";
 import RoomSearch from "../common/RoomSearch.jsx";
 import "../../assets/css/HomePage.css";
+import Map from "../common/Map.jsx";
 
 const HomePage = () => {
     const [roomSearchResult, setRoomSearchResult] = useState([]);
@@ -28,8 +28,6 @@ const HomePage = () => {
                     </div>
                 </header>
             </section>
-
-            {/* Thêm wrapper để kiểm soát khoảng cách giữa RoomSearch và RoomResult */}
             <div className="search-result-wrapper">
                 <RoomSearch
                     handleSearchResult={handleSearchResult}
@@ -37,9 +35,8 @@ const HomePage = () => {
                 />
                 <RoomResult roomSearchResult={roomSearchResult} className="room-result"/>
             </div>
-
             <h4>
-                <a className="view-rooms-home" href="/room">
+                <a className="view-rooms-home" href="/rooms">
                     All Rooms
                 </a>
             </h4>
@@ -69,6 +66,11 @@ const HomePage = () => {
                     </div>
                 </div>
             </section>
+
+            {/* Đảm bảo component Map được bọc trong một container có chiều cao */}
+            <div style={{ height: "400px", width: "100%", marginTop: "20px" }}>
+                <Map />
+            </div>
         </div>
     );
 };

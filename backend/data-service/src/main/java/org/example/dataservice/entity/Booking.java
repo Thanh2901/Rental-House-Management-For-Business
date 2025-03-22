@@ -1,7 +1,10 @@
 package org.example.dataservice.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.example.dataservice.util.BookingStatus;
 import org.example.dataservice.util.PaymentStatus;
 
@@ -12,6 +15,9 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "tbl_booking")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Booking extends AbstractEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

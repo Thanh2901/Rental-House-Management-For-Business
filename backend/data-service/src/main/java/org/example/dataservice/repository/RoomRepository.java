@@ -25,9 +25,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     """)
     List<Room> findAvailableRooms(@Param("checkInDate") LocalDate checkInDate,
                                   @Param("checkOutDate") LocalDate checkOutDate,
-                                  @Param("roomType") String roomType);
-
-
+                                  @Param("roomType") RoomType roomType);
 
     @Query("""
                 SELECT r FROM Room r

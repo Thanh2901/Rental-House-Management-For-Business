@@ -21,8 +21,7 @@ import java.time.LocalDateTime;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BookingDTO {
     private Long id;
-    private UserDTO user;
-    private RoomDTO room;
+    private Long userId;
     private Long roomId;
     private PaymentStatus paymentStatus;
     private LocalDate startDate;

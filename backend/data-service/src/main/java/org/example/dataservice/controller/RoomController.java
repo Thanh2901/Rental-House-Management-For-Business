@@ -9,6 +9,9 @@ import org.example.dataservice.dto.Response;
 import org.example.dataservice.dto.RoomDTO;
 import org.example.dataservice.service.RoomService;
 import org.example.dataservice.util.RoomType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RoomController {
 
+    private static final Logger log = LoggerFactory.getLogger(RoomController.class);
     private final RoomService roomService;
 
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -90,10 +94,11 @@ public class RoomController {
 
     @GetMapping("/available")
     public ResponseEntity<Response> getAvailableRooms(
-            @RequestParam LocalDate startDate,
-            @RequestParam LocalDate endDate,
-            @RequestParam (required = false) RoomType roomType
-    ) {
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+            @RequestParam("roomType") RoomType roomType)
+    {
+        log.info("Room Type: {}", roomType);
         return new ResponseEntity<>(roomService.getAvailableRoom(startDate, endDate, roomType), HttpStatus.OK);
     }
 

@@ -1,0 +1,524 @@
+/* Định nghĩa biến CSS toàn cục */
+:root {
+    --primary-color: #ff6f61;
+    --primary-hover: #e65b50;
+    --secondary-color: #2c3e50;
+    --text-gray: #7f8c8d;
+    --light-bg: #f8f9fa;
+    --white: #fff;
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.1); /* Giảm shadow */
+    --shadow-md: 0 16px 32px rgba(0, 0, 0, 0.2); /* Giảm shadow */
+    --radius-md: 6px; /* Giảm border-radius */
+    --radius-lg: 10px; /* Giảm border-radius */
+    --transition: all 0.3s ease;
+}
+
+/* Container chính */
+.room-details-booking {
+    font-family: 'Roboto', Arial, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px 15px; /* Giảm padding */
+    background-color: var(--light-bg);
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Tiêu đề trang */
+.room-details-booking h2 {
+    font-size: 28px; /* Giảm font-size */
+    font-weight: 700;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-bottom: 20px; /* Giảm margin */
+    position: relative;
+}
+
+.room-details-booking h2:after {
+    content: "";
+    display: block;
+    width: 40px; /* Giảm chiều rộng */
+    height: 2px; /* Giảm chiều cao */
+    background-color: var(--primary-color);
+    margin: 8px auto 0; /* Giảm margin */
+}
+
+/* Card phòng */
+.room-details-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 20px; /* Giảm margin */
+}
+
+/* Container hình ảnh phòng */
+.room-image-container {
+    position: relative;
+    width: 100%;
+    height: 250px; /* Giảm chiều cao */
+}
+
+.room-details-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.room-price-tag {
+    position: absolute;
+    bottom: 15px; /* Giảm khoảng cách */
+    right: 15px;
+    background-color: rgba(255, 111, 97, 0.9);
+    color: var(--white);
+    padding: 8px 12px; /* Giảm padding */
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 16px; /* Giảm font-size */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Giảm shadow */
+}
+
+/* Nội dung chi tiết phòng */
+.room-details-content {
+    padding: 20px; /* Giảm padding */
+}
+
+.room-details-info h3 {
+    font-size: 24px; /* Giảm font-size */
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 15px; /* Giảm margin */
+}
+
+/* Highlights */
+.room-highlights {
+    display: flex;
+    gap: 20px; /* Giảm gap */
+    flex-wrap: wrap;
+    margin-bottom: 20px; /* Giảm margin */
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Giảm gap */
+}
+
+.highlight-icon {
+    font-size: 20px; /* Giảm font-size */
+    color: var(--primary-color);
+}
+
+.highlight-label {
+    font-size: 12px; /* Giảm font-size */
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+.highlight-value {
+    font-size: 16px; /* Giảm font-size */
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+/* Mô tả phòng */
+.room-description {
+    margin-top: 15px; /* Giảm margin */
+    border-top: 1px solid #ecf0f1;
+    padding-top: 15px; /* Giảm padding */
+}
+
+.room-description h4 {
+    font-size: 16px; /* Giảm font-size */
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 8px; /* Giảm margin */
+}
+
+.room-description p {
+    font-size: 14px; /* Giảm font-size */
+    color: var(--text-gray);
+    line-height: 1.5; /* Giảm line-height */
+}
+
+/* Class nút chung */
+.btn {
+    width: 100%;
+    padding: 12px 20px; /* Giảm padding */
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 16px; /* Giảm font-size */
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; /* Giảm gap */
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(230, 91, 80, 0.3); /* Giảm shadow */
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-gray);
+    border: 1px solid #dfe6e9;
+}
+
+.btn-secondary:hover {
+    background-color: #f1f2f6;
+    color: var(--secondary-color);
+}
+
+.btn-disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Date picker - Phần chính cần làm nhỏ */
+.date-picker-container {
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 20px; /* Giảm padding */
+    margin-bottom: 20px; /* Giảm margin */
+    box-shadow: var(--shadow-sm);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.date-picker-title {
+    font-size: 18px; /* Giảm font-size */
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 15px; /* Giảm margin */
+    text-align: center;
+}
+
+.date-pickers-wrapper {
+    display: flex;
+    gap: 15px; /* Giảm gap */
+    margin-bottom: 20px; /* Giảm margin */
+}
+
+.date-picker {
+    flex: 1;
+}
+
+.date-picker label {
+    display: block;
+    font-size: 12px; /* Giảm font-size */
+    font-weight: 500;
+    color: var(--text-gray);
+    margin-bottom: 6px; /* Giảm margin */
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.date-icon {
+    position: absolute;
+    left: 10px; /* Giảm khoảng cách */
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+    font-size: 16px; /* Giảm font-size */
+}
+
+.date-picker input {
+    width: 100%;
+    padding: 10px 10px 10px 30px; /* Giảm padding và điều chỉnh cho icon */
+    border: 1px solid #dfe6e9;
+    border-radius: var(--radius-md);
+    font-size: 14px; /* Giảm font-size */
+    color: var(--secondary-color);
+    background-color: var(--light-bg);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.date-picker input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(255, 111, 97, 0.2); /* Giảm shadow */
+    outline: none;
+}
+
+.date-picker input::placeholder {
+    color: #b2bec3;
+}
+
+/* Booking preview */
+.booking-preview-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.booking-preview {
+    background-color: var(--white);
+    width: 90%;
+    max-width: 500px; /* Giảm max-width */
+    border-radius: var(--radius-lg);
+    padding: 20px; /* Giảm padding */
+    box-shadow: var(--shadow-md);
+    animation: slideUp 0.4s ease-out;
+}
+
+.booking-preview h3 {
+    font-size: 20px; /* Giảm font-size */
+    font-weight: 700;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-bottom: 20px; /* Giảm margin */
+    position: relative;
+}
+
+.booking-preview h3:after {
+    content: "";
+    display: block;
+    width: 30px; /* Giảm chiều rộng */
+    height: 2px; /* Giảm chiều cao */
+    background-color: var(--primary-color);
+    margin: 6px auto 0; /* Giảm margin */
+}
+
+/* Preview info */
+.preview-room-info {
+    display: flex;
+    margin-bottom: 15px; /* Giảm margin */
+    padding-bottom: 15px; /* Giảm padding */
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.preview-image {
+    width: 80px; /* Giảm kích thước */
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+}
+
+.preview-room-details {
+    margin-left: 15px; /* Giảm margin */
+}
+
+.preview-room-details h4 {
+    font-size: 18px; /* Giảm font-size */
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 4px; /* Giảm margin */
+}
+
+.preview-room-details p {
+    color: var(--text-gray);
+    margin-bottom: 4px; /* Giảm margin */
+    font-size: 12px; /* Giảm font-size */
+}
+
+/* Preview booking details */
+.preview-booking-details {
+    margin-top: 15px; /* Giảm margin */
+}
+
+.preview-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px; /* Giảm margin */
+}
+
+.preview-label {
+    font-size: 14px; /* Giảm font-size */
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+.preview-value {
+    font-size: 14px; /* Giảm font-size */
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.total-price {
+    margin-top: 15px; /* Giảm margin */
+    padding-top: 12px; /* Giảm padding */
+    border-top: 1px dashed #ecf0f1;
+}
+
+.total-price .preview-label {
+    font-size: 16px; /* Giảm font-size */
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.total-price .preview-value {
+    font-size: 20px; /* Giảm font-size */
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* Success message */
+.message-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.message-box {
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 20px; /* Giảm padding */
+    text-align: center;
+    max-width: 70%; /* Giảm max-width */
+    box-shadow: var(--shadow-md);
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.success-icon {
+    font-size: 40px; /* Giảm font-size */
+    color: #2ecc71;
+    background-color: rgba(46, 204, 113, 0.1);
+    width: 60px; /* Giảm kích thước */
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px; /* Giảm margin */
+}
+
+.booking-success-message {
+    font-size: 16px; /* Giảm font-size */
+    color: var(--secondary-color);
+    font-weight: 500;
+    line-height: 1.5; /* Giảm line-height */
+}
+
+/* Error message */
+.error-alert {
+    background-color: #ffe8e6;
+    border-left: 3px solid #ff6b6b; /* Giảm border */
+    border-radius: 4px;
+    padding: 10px 12px; /* Giảm padding */
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px; /* Giảm margin */
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.error-icon {
+    font-size: 18px; /* Giảm font-size */
+    margin-right: 8px; /* Giảm margin */
+}
+
+.error-message {
+    font-size: 14px; /* Giảm font-size */
+    color: #e74c3c;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Loading */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 250px; /* Giảm chiều cao */
+}
+
+.loading-spinner {
+    width: 40px; /* Giảm kích thước */
+    height: 40px;
+    border: 3px solid rgba(255, 111, 97, 0.3); /* Giảm border */
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px; /* Giảm margin */
+}
+
+.loading-container p {
+    font-size: 16px; /* Giảm font-size */
+    color: var(--text-gray);
+}
+
+/* Error container */
+.error-container {
+    text-align: center;
+    padding: 30px; /* Giảm padding */
+}
+
+.error-container p {
+    font-size: 16px; /* Giảm font-size */
+    color: #e74c3c;
+    margin-bottom: 15px; /* Giảm margin */
+}
+
+.error-container button {
+    padding: 10px 20px; /* Giảm padding */
+    background-color: #3498db;
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 14px; /* Giảm font-size */
+    transition: var(--transition);
+}
+
+.error-container button:hover {
+    background-color: #2980b9;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; } /* Giảm translateY */
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-3px, 0, 0); } /* Giảm translate */
+    40%, 60% { transform: translate3d(3px, 0, 0); }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

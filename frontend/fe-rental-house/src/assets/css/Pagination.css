@@ -1,0 +1,70 @@
+/* Container for the pagination navigation */
+.pagination-nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Unordered list for pagination items */
+.pagination-ul {
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+}
+
+/* List item for each page number */
+.pagination-li {
+    display: inline-block;
+}
+
+/* Button for each page number */
+.pagination-button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Hover effect for pagination buttons */
+.pagination-button:hover {
+    background-color: #f1f1f1;
+    border-color: #ff6f61;
+}
+
+/* Style for the current page */
+.pagination-button.current-page {
+    background-color: #ff6f61;
+    color: #fff;
+    border-color: #ff6f61;
+}
+
+/* Disabled state (optional, if you add disabled logic later) */
+.pagination-button:disabled {
+    background-color: #e9ecef;
+    color: #999;
+    cursor: not-allowed;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .pagination-button {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pagination-ul {
+        gap: 5px;
+    }
+
+    .pagination-button {
+        padding: 5px 8px;
+        font-size: 10px;
+    }
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import "../../assets/css/Pagination.css"
 
 const Pagination = ({roomPerPage, totalRooms, currentPage, paginate}) => {
     const pageNumber = []

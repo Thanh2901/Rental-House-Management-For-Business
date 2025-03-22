@@ -59,9 +59,4 @@ public class AuthController {
     public ApiResponse<UserResponse> getUserInfo(HttpServletRequest request) {
         return ApiResponse.<UserResponse>builder().data(authenticationService.getUserInfo(request)).build();
     }
-
-//    @GetMapping("/{id}")
-//    public ApiResponse<CredentialDTO> getUser(@PathVariable String id) {
-//        return ApiResponse.<CredentialDTO>builder().data(authenticationService.getCredentialById(id)).build();
-//    }
 }
