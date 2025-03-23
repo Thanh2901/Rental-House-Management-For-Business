@@ -22,12 +22,6 @@ public class Response {
     private int status;
     private String message;
 
-    // for login
-    private String token;
-    private UserRole role;
-    private Boolean isActive;
-    private String expirationTime;
-
     // data output
     private UserDTO user;
     private List<UserDTO> users;

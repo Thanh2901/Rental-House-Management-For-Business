@@ -1,6 +1,7 @@
 package org.example.dataservice.client;
 
 import org.example.dataservice.dto.NotificationDTO;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 
 @Service
