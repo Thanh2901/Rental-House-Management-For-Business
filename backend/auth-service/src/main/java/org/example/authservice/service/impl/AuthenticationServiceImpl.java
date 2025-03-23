@@ -240,33 +240,25 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public UserResponse getUserInfo(HttpServletRequest request) {
         // Lấy access token từ header
         String accessToken = request.getHeader("Authorization");
-
         if (StringUtils.isBlank(accessToken) || !accessToken.startsWith("Bearer ")) {
             throw new RuntimeException("Invalid token");
         }
-
         // Loại bỏ prefix "Bearer "
         accessToken = accessToken.substring(7);
-
         // Trích xuất email từ token
         final String email = jwtService.extractEmail(accessToken, ACCESS_TOKEN);
-
         // Kiểm tra xem người dùng tồn tại hay không
         Credential credential = credentialRepository.findCredentialByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
         // Kiểm tra token có hợp lệ không
         if (!jwtService.isValidToken(accessToken, credential, ACCESS_TOKEN)) {
             throw new RuntimeException("Token is validate or expire");
         }
-
         // Gọi đến service người dùng để lấy thông tin chi tiết
         var userInfo = userClient.getUser(credential.getId());
-
         if (userInfo.getCode() != 200) {
             throw new RuntimeException("Token is invalid!");
         }
-
         return userInfo.getData();
     }
 

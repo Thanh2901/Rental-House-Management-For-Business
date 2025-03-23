@@ -6,9 +6,11 @@ import org.example.dataservice.client.NotificationClient;
 import org.example.dataservice.dto.BookingDTO;
 import org.example.dataservice.dto.NotificationDTO;
 import org.example.dataservice.dto.Response;
-import org.example.dataservice.dto.response.UserResponse;
+import org.example.dataservice.dto.request.BookingRequest;
+import org.example.dataservice.dto.request.BookingUpdateRequest;
 import org.example.dataservice.entity.Booking;
 import org.example.dataservice.entity.Room;
+import org.example.dataservice.entity.User;
 import org.example.dataservice.exception.InvalidBookingException;
 import org.example.dataservice.exception.NotFoundException;
 import org.example.dataservice.mapper.BookingMapper;
@@ -38,35 +40,41 @@ public class BookingServiceImpl implements BookingService {
     private final BookingCodeGenerator bookingCodeGenerator;
     private final BookingMapper bookingMapper;
     private final BookingRepository bookingRepository;
+    private final UserService userService;
     private final UserRepository userRepository;
 
     @Override
-    public Response createBooking(BookingDTO bookingDTO, String credentialId) {
+    public Response createBooking(BookingRequest bookingRequest, String credentialId) {
 
-        var currentUser = userRepository.findByCredentialId(credentialId).orElseThrow(()->new NotFoundException("user not found"));
+        User currentUser = userRepository.findByCredentialId(credentialId)
+                .orElseThrow(() -> new NotFoundException("User not found"));
 
-        Room room = roomRepository.findById(bookingDTO.getId())
+        if (bookingRepository.findByUserId(currentUser.getId()).contains(currentUser)) {
+            throw new InvalidBookingException("Booking already exists");
+        }
+
+        Room room = roomRepository.findById(bookingRequest.getRoomId())
                 .orElseThrow(()-> new NotFoundException("Room not found"));
         // validate
-        if (bookingDTO.getStartDate().isBefore(LocalDate.now())) {
+        if (bookingRequest.getStartDate().isBefore(LocalDate.now())) {
             throw new InvalidBookingException("start date can not before today");
         }
-        if (bookingDTO.getStartDate().isAfter(bookingDTO.getEndDate())) {
+        if (bookingRequest.getStartDate().isAfter(bookingRequest.getEndDate())) {
             throw new InvalidBookingException("start date can not after end date");
         }
-        if (bookingDTO.getEndDate().isBefore(bookingDTO.getStartDate())) {
+        if (bookingRequest.getEndDate().isBefore(bookingRequest.getStartDate())) {
             throw new InvalidBookingException("end date can not before start date");
         }
-        if (bookingDTO.getEndDate().isAfter(LocalDate.now())) {
-            throw new InvalidBookingException("end date can not after today");
+        if (bookingRequest.getEndDate().isBefore(LocalDate.now())) {
+            throw new InvalidBookingException("end date can not before today");
         }
 
-        boolean isAvailable = bookingRepository.isRoomAvailable(room.getId(), bookingDTO.getStartDate(), bookingDTO.getEndDate());
+        boolean isAvailable = bookingRepository.isRoomAvailable(room.getId(), bookingRequest.getStartDate(), bookingRequest.getEndDate());
         if (!isAvailable) {
             throw new InvalidBookingException("Room is not available for the selected date ranges");
         }
         // calculate the total price needed to pay for the stay
-        BigDecimal totalPrice = calculateTotalPrice(room, bookingDTO);
+        BigDecimal totalPrice = calculateTotalPrice(room, bookingRequest);
         String bookingReference = bookingCodeGenerator.generateBookingReference();
 
         // create and save the booking
@@ -74,8 +82,8 @@ public class BookingServiceImpl implements BookingService {
         booking.setUser(currentUser);
         booking.setRoom(room);
         booking.setBookingReference(bookingReference);
-        booking.setStartDate(bookingDTO.getStartDate());
-        booking.setEndDate(bookingDTO.getEndDate());
+        booking.setStartDate(bookingRequest.getStartDate());
+        booking.setEndDate(bookingRequest.getEndDate());
         booking.setTotalPrice(totalPrice);
         booking.setBookingStatus(BookingStatus.BOOKED);
         booking.setPaymentStatus(PaymentStatus.PENDING);
@@ -104,10 +112,10 @@ public class BookingServiceImpl implements BookingService {
                 .build();
     }
 
-    private BigDecimal calculateTotalPrice(Room room, BookingDTO bookingDTO) {
+    private BigDecimal calculateTotalPrice(Room room, BookingRequest bookingRequest) {
         BigDecimal pricePerMoth = room.getPricePerMonth();
         BigDecimal totalPrice = BigDecimal.ZERO;
-        long months = ChronoUnit.MONTHS.between(bookingDTO.getStartDate(), bookingDTO.getEndDate());
+        long months = ChronoUnit.MONTHS.between(bookingRequest.getStartDate(), bookingRequest.getEndDate());
         return pricePerMoth.multiply(BigDecimal.valueOf(months));
     }
 
@@ -117,8 +125,8 @@ public class BookingServiceImpl implements BookingService {
                 map(bookingMapper::toBookingDTO).
                 toList();
         for (BookingDTO bookingDTO : bookingDTOList) {
-            bookingDTO.setUserId(null);
-            bookingDTO.setRoomId(null);
+            bookingDTO.setUser(null);
+            bookingDTO.setRoom(null);
         }
         return Response.builder()
                 .status(200)
@@ -137,15 +145,15 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Response updateBooking(BookingDTO bookingDTO) {
-        if (bookingDTO.getId() == null) throw new NotFoundException("Booking id is required");
-        Booking existingBooking = bookingRepository.findById(bookingDTO.getId())
+    public Response updateBooking(BookingUpdateRequest updateRequest) {
+        if (updateRequest == null) throw new NotFoundException("Booking id is required");
+        Booking existingBooking = bookingRepository.findById(updateRequest.getId())
                 .orElseThrow(()-> new NotFoundException("Booking not found"));
-        if (bookingDTO.getBookingReference() != null) {
-            existingBooking.setBookingStatus(bookingDTO.getStatus());
+        if (existingBooking.getBookingReference() != null) {
+            existingBooking.setBookingStatus(updateRequest.getBookingStatus());
         }
-        if (bookingDTO.getPaymentStatus() != null) {
-            existingBooking.setPaymentStatus(bookingDTO.getPaymentStatus());
+        if (existingBooking.getPaymentStatus() != null) {
+            existingBooking.setPaymentStatus(updateRequest.getPaymentStatus());
         }
         bookingRepository.save(existingBooking);
         return Response.builder()

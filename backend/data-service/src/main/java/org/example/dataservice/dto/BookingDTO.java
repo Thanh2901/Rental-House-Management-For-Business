@@ -21,13 +21,13 @@ import java.time.LocalDateTime;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BookingDTO {
     private Long id;
-    private Long userId;
-    private Long roomId;
+    private UserDTO user;
+    private RoomDTO room;
     private PaymentStatus paymentStatus;
     private LocalDate startDate;
     private LocalDate endDate;
     private BigDecimal totalPrice;
     private String bookingReference;
     private LocalDateTime createdAt;
-    private BookingStatus status;
+    private BookingStatus bookingStatus;
 }
