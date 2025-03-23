@@ -26,6 +26,18 @@ public class Notification extends AbstractEntity{
     @Enumerated(EnumType.STRING)
     private NotificationType notificationType;
 
+    public Notification() {
+    }
+
+    public Notification(Long id, String subject, String recipient, String body, String bookingReference, NotificationType notificationType) {
+        this.id = id;
+        this.subject = subject;
+        this.recipient = recipient;
+        this.body = body;
+        this.bookingReference = bookingReference;
+        this.notificationType = notificationType;
+    }
+
     public Long getId() {
         return id;
     }

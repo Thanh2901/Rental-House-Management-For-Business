@@ -1,20 +1,8 @@
 package org.example.notificationservice.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.example.notificationservice.util.NotificationType;
 
-import java.time.LocalDateTime;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 public class NotificationDTO {
     private Long id;
     @NotBlank(message = "subject is required")
