@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "data-service", url = "http://localhost:9007")
+@FeignClient(name = "data-service")
 public interface UserClient {
     @PostMapping("/api/data/users/registration")
     ApiResponse<UserResponse> registerUser(@RequestBody RegisterUserRequest registerUserRequest);

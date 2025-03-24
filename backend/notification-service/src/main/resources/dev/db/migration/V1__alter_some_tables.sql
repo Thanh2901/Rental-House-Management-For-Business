@@ -1,0 +1,1 @@
+ALTER TABLE tbl_notification ALTER COLUMN body TYPE TEXT;

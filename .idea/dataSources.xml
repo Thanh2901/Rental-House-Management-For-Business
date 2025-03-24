@@ -79,7 +79,7 @@
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="notification-service@localhost" uuid="588cdc9b-a7c5-4b4d-95a6-b883f4e74cb9">
+    <data-source source="LOCAL" name="notification-service@localhost" uuid="fe27d09e-c810-4bc2-be41-5570f69b31ba">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>

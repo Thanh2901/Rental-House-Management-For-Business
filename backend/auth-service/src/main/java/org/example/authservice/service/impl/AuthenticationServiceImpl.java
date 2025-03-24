@@ -4,8 +4,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.example.authservice.client.NotificationClient;
 import org.example.authservice.client.UserClient;
 import org.example.authservice.dto.CredentialDTO;
+import org.example.authservice.dto.NotificationDTO;
 import org.example.authservice.dto.request.LoginRequest;
 import org.example.authservice.dto.request.RegisterUserRequest;
 import org.example.authservice.dto.request.RegistrationRequest;
@@ -21,8 +23,10 @@ import org.example.authservice.service.AuthenticationService;
 import org.example.authservice.service.JwtService;
 import org.example.authservice.service.TokenService;
 import org.example.authservice.service.UserService;
+import org.example.authservice.util.NotificationType;
 import org.example.authservice.util.TokenType;
 import org.example.authservice.util.UserRole;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -49,6 +53,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserService userService;
     private final UserClient userClient;
     private final CredentialMapper credentialMapper;
+    private final NotificationClient notificationClient;
 
     @Override
     public TokenResponse authenticate(LoginRequest loginRequest) {
@@ -140,13 +145,35 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public String forgotPassword(String email) {
-        Credential credential = userService.getCredentialByEmail(email);
-        if (!credential.isEnabled()) {
+
+        Optional<Credential> credential = credentialRepository.findCredentialByEmail(email.trim().toLowerCase());
+
+        if (credential.isEmpty()) {
+            log.error("Credential not found for email: {}", email);
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        if (!credential.get().isEnabled()) {
             throw new RuntimeException("Tài khoản của bạn chưa được kích hoạt");
         }
-        String resetToken = jwtService.generateResetToken(credential);
-        String confirmLink = String.format("http://localhost:9008/auth/reset-password?token=%s", resetToken);
+
+        String resetToken = jwtService.generateResetToken(credential.get());
+        System.out.println(resetToken);
+
+        String confirmLink = String.format("""
+        curl --location 'http://localhost:9090/api/auth/reset-password' \\
+        --header 'accept: */*' \\
+        --header 'Content-Type: application/json' \\
+        --data '{"secretKey": "%s"}'""", resetToken);
+
         log.info("confirm link: {}", confirmLink);
+        NotificationDTO notificationDTO = new NotificationDTO();
+        notificationDTO.setSubject("Reset Password");
+        notificationDTO.setRecipient(email);
+        notificationDTO.setNotificationType(NotificationType.EMAIL);
+        notificationDTO.setBody(confirmLink);
+        notificationClient.sendMail(notificationDTO);
+
         return "Yêu cầu đặt lại mật khẩu đã được gửi. Vui lòng kiểm tra email.";
     }
 
@@ -210,6 +237,40 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             throw new RuntimeException("Failed to register new user profile");
         }
 
+        NotificationDTO notificationDTO = new NotificationDTO();
+        notificationDTO.setNotificationType(NotificationType.EMAIL);
+        notificationDTO.setRecipient(registrationRequest.getEmail());
+        notificationDTO.setSubject("Thư chào mừng");
+        String body = String.format(
+                "Chào mừng %s %s đã đăng ký tài khoản khách thuê tại Happy ViVu House%n" +
+                        "Xác nhận thông tin:%n" +
+                        "Họ tên: %s %s%n" +
+                        "Số điện thoại: %s%n" +
+                        "Quê quán: %s",
+                registrationRequest.getFirstName(), registrationRequest.getLastName(),
+                registrationRequest.getFirstName(), registrationRequest.getLastName(),
+                registrationRequest.getPhoneNumber(), registrationRequest.getIdentityCardNumber()
+        );
+
+        notificationDTO.setBody(body);
+
+        var notificationStatus = notificationClient.sendMail(notificationDTO);
+
+        // Better approach with retry limit
+        int maxRetries = 3;
+        int attempts = 0;
+        boolean success = false;
+
+        while (!success && attempts < maxRetries) {
+            try {
+                var result = notificationClient.sendMail(notificationDTO);
+                success = (result.getStatusCode() == HttpStatus.OK);
+            } catch (Exception e) {
+                log.error("Failed to send notification, attempt {}: {}", attempts, e.getMessage());
+            }
+            attempts++;
+        }
+
         return userResponse.getData();
     }
 
@@ -221,6 +282,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     private Credential isValidUserByToken(String secretKey) {
+        System.out.println(secretKey);
+        log.debug("Received secretKey: {}", secretKey);
         final String email = jwtService.extractEmail(secretKey, RESET_TOKEN);
         var credential = userService.getCredentialByEmail(email);
         if (!jwtService.isValidToken(secretKey, credential, RESET_TOKEN)) {

@@ -15,12 +15,14 @@ public class EmailConfig {
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
         mailSender.setUsername("thanhvuworkspace@gmail.com");
-        mailSender.setPassword("rcpxmruopugdfshu");
+        mailSender.setPassword("ughbqlzdbgunnldu");
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");  // Add this line
+        props.put("mail.debug", "true");  // Add this for debugging
 
         return mailSender;
     }

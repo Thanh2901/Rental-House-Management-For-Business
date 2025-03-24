@@ -10,10 +10,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Response {
@@ -27,4 +23,49 @@ public class Response {
 
     private final LocalDateTime timestamp = LocalDateTime.now();
 
+    public Response(int status, String message, NotificationDTO notification, List<NotificationDTO> notifications) {
+        this.status = status;
+        this.message = message;
+        this.notification = notification;
+        this.notifications = notifications;
+    }
+
+    public Response() {
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public NotificationDTO getNotification() {
+        return notification;
+    }
+
+    public void setNotification(NotificationDTO notification) {
+        this.notification = notification;
+    }
+
+    public List<NotificationDTO> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<NotificationDTO> notifications) {
+        this.notifications = notifications;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
 }

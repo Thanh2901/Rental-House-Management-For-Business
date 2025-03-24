@@ -2,8 +2,8 @@ package org.example.notificationservice.service.impl;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-import lombok.extern.slf4j.Slf4j;
 import org.example.notificationservice.dto.NotificationDTO;
+import org.example.notificationservice.dto.Response;
 import org.example.notificationservice.entity.Notification;
 import org.example.notificationservice.mapper.NotificationMapper;
 import org.example.notificationservice.repository.NotificationRepository;
@@ -29,6 +29,8 @@ public class EmailServiceImpl implements EmailService {
     private final TemplateEngine templateEngine;
     @Value("thanhvuworkspace@gmail.com")
     private String from;
+    @Value("Happy ViVu House Co.")
+    private String brandName;
     private final NotificationMapper notificationMapper;
 
     public EmailServiceImpl(NotificationRepository notificationRepository,
@@ -42,7 +44,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void sendEmail(NotificationDTO notificationDTO) {
+    public Response sendEmail(NotificationDTO notificationDTO) {
         try {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());
@@ -51,6 +53,7 @@ public class EmailServiceImpl implements EmailService {
             Context context = new Context();
             context.setVariable("name", notificationDTO.getRecipient());
             context.setVariable("content", notificationDTO.getBody());
+            context.setVariable("sender", brandName);
             String html = templateEngine.process("welcome-email", context);
 
             // send email
@@ -61,11 +64,21 @@ public class EmailServiceImpl implements EmailService {
             mailSender.send(message);
 
             Notification notification = notificationMapper.toNotification(notificationDTO);
-            notificationRepository.save(notification);
+            Notification newNotification = notificationRepository.save(notification);
 
-            logger.info("Email sent successfully to: {}", notificationDTO.getRecipient());
+            Response response = new Response();
+            response.setMessage("mail was successfully sent");
+            response.setStatus(200);
+            response.setNotification(notificationMapper.toNotificationDTO(newNotification));
+
+            return response;
+
         } catch (MessagingException e) {
-            logger.error("Failed to send email to: {}", notificationDTO.getRecipient(), e);
+
+            Response response = new Response();
+            response.setMessage("mail could not be sent" + e.getMessage());
+            response.setStatus(500);
+            return response;
         }
     }
 }

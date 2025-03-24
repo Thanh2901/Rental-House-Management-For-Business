@@ -1,7 +1,7 @@
-package org.example.notificationservice.dto;
+package org.example.authservice.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import org.example.notificationservice.util.NotificationType;
+import org.example.authservice.util.NotificationType;
 
 public class NotificationDTO {
     private Long id;
