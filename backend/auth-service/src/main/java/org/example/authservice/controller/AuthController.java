@@ -10,7 +10,6 @@ import org.example.authservice.dto.request.ResetPasswordDTO;
 import org.example.authservice.dto.response.TokenResponse;
 import org.example.authservice.dto.response.UserResponse;
 import org.example.authservice.service.AuthenticationService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -42,7 +41,7 @@ public class AuthController {
 
     @PostMapping("/forget-password")
     public ApiResponse<String> forgetPassword(@RequestBody String email) {
-        return ApiResponse.<String>builder().data(authenticationService.resetPassword(email)).build();
+        return ApiResponse.<String>builder().data(authenticationService.forgotPassword(email)).build();
     }
 
     @PostMapping("/reset-password")

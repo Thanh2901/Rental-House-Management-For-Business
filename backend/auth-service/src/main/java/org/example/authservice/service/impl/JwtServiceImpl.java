@@ -2,10 +2,11 @@ package org.example.authservice.service.impl;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.bouncycastle.util.Arrays;
 import org.example.authservice.constant.JwtConstant;
 import org.example.authservice.service.JwtService;
 import org.example.authservice.util.TokenType;
@@ -14,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -76,7 +79,9 @@ public class JwtServiceImpl implements JwtService {
         claims.put("roles", userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority) // get "ROLE_ADMIN" or "ROLE_USER"
                 .collect(Collectors.toList()));
-        return generateResetToken(claims, userDetails);
+        String resetToken = generateResetToken(claims, userDetails);
+        log.info("Generated reset token: {}", resetToken);
+        return resetToken;
     }
 
     private String generateAccessToken(Map<String, Object> claims, UserDetails userDetails) {
@@ -100,22 +105,50 @@ public class JwtServiceImpl implements JwtService {
     }
 
     private String generateResetToken(Map<String, Object> claims, UserDetails userDetails) {
-        return Jwts.builder()
+        String resetToken = Jwts.builder()
                 .claims(claims)
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1 month
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 2)) // 2 minutes
                 .signWith(getSecretKey(RESET_TOKEN))
                 .compact();
+        log.info("Generated reset token: {}", resetToken);
+        String[] tokenParts = resetToken.split("\\.");
+        log.info("Token parts count: {}", tokenParts.length);
+        if (tokenParts.length != 3) {
+            throw new RuntimeException("Generated reset token is malformed: " + resetToken);
+        }
+        return resetToken;
     }
 
     private SecretKey getSecretKey(TokenType tokenType) {
+        String keyString;
         switch (tokenType) {
-            case ACCESS_TOKEN -> {return Keys.hmacShaKeyFor(Decoders.BASE64.decode(accessKey));}
-            case REFRESH_TOKEN -> {return Keys.hmacShaKeyFor(Decoders.BASE64.decode(refreshKey));}
-            case RESET_TOKEN -> {return Keys.hmacShaKeyFor(Decoders.BASE64.decode(resetKey));}
+            case ACCESS_TOKEN -> keyString = accessKey;
+            case REFRESH_TOKEN -> keyString = refreshKey;
+            case RESET_TOKEN -> keyString = resetKey;
             default -> throw new RuntimeException("Token type is invalid");
         }
+
+        byte[] keyBytes;
+        if (tokenType == RESET_TOKEN) {
+            try {
+                keyBytes = Base64.getDecoder().decode(keyString);
+                log.info("Decoded resetKey: {}, length: {}", keyString, keyBytes.length);
+            } catch (IllegalArgumentException e) {
+                log.error("Failed to decode resetKey: {}", keyString, e);
+                throw new RuntimeException("Invalid resetKey format");
+            }
+        } else {
+            keyBytes = keyString.getBytes(StandardCharsets.UTF_8);
+        }
+
+        if (keyBytes.length < 32) {
+            log.warn("Key length is less than 32 bytes, padding to 32 bytes");
+            keyBytes = Arrays.copyOf(keyBytes, 32);
+        }
+
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 
     private <T> T extractClaims(String token, Function<Claims, T> claimsResolver, TokenType tokenType) {

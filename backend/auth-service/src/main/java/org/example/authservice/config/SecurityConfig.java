@@ -36,7 +36,6 @@ public class SecurityConfig {
     private final PreFilter preFilter;
     private final UserService userService;
 
-    // CORS configuration integrated with Spring Security
     @Bean
     public SecurityFilterChain configure(@NonNull HttpSecurity httpSecurity) throws Exception {
         httpSecurity
@@ -52,7 +51,7 @@ public class SecurityConfig {
         return httpSecurity.build();
     }
 
-    // Define CORS configuration source
+    // define CORS configuration source
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();

@@ -2,7 +2,6 @@ package org.example.notificationservice.service.impl;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-import lombok.extern.slf4j.Slf4j;
 import org.example.notificationservice.dto.NotificationDTO;
 import org.example.notificationservice.dto.Response;
 import org.example.notificationservice.entity.Notification;
@@ -30,6 +29,8 @@ public class EmailServiceImpl implements EmailService {
     private final TemplateEngine templateEngine;
     @Value("thanhvuworkspace@gmail.com")
     private String from;
+    @Value("Happy ViVu House Co.")
+    private String brandName;
     private final NotificationMapper notificationMapper;
 
     public EmailServiceImpl(NotificationRepository notificationRepository,
@@ -52,7 +53,7 @@ public class EmailServiceImpl implements EmailService {
             Context context = new Context();
             context.setVariable("name", notificationDTO.getRecipient());
             context.setVariable("content", notificationDTO.getBody());
-            context.setVariable("sender", from);
+            context.setVariable("sender", brandName);
             String html = templateEngine.process("welcome-email", context);
 
             // send email
