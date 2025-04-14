@@ -1,13 +1,13 @@
 /* 🔹 Tăng chiều rộng và canh giữa */
 .search-container {
-    background: #fadfd1;  /* Màu nền sáng hơn */
-    padding: 24px;
+    /* background: #fadfd1;  Màu nền sáng hơn */
+    background: #fff; /* Màu nền trắng để nổi bật hơn */
     border-radius: 12px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     gap: 16px;
-    width: 25%;  /* Rộng hơn, phù hợp với layout */
+    width: 100%;  /* Rộng hơn, phù hợp với layout */
     /* max-width: 900px; */
     margin: 20px auto;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng nổi nhẹ */
@@ -16,7 +16,8 @@
 /* 🔹 Tăng kích thước ô nhập và căn chỉnh */
 .search-fields {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
     justify-content: space-between;
     gap: 12px;
     width: 100%;
@@ -64,6 +65,9 @@
     background: #FF8C00; /* Màu cam đậm hơn khi hover */
 }
 
+.search-button-container {
+    padding: 4px 16px;
+}
 /* 🔹 Giảm kích thước chữ của tiêu đề tháng */
 .react-datepicker__current-month {
     font-size: 14px !important; /* Giảm tiếp xuống 14px */

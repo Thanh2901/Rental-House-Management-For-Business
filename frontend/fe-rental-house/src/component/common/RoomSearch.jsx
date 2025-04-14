@@ -103,7 +103,6 @@ const RoomSearch = ({ handleSearchResult }) => {
     <section className="search-container" ref={containerRef}>
       <div className="search-fields">
         {/* Check-in Date */}
-        <label>Check-in Date</label>
         <Flatpickr
           value={startDate}
           onChange={(date) => setStartDate(date[0])}
@@ -114,12 +113,11 @@ const RoomSearch = ({ handleSearchResult }) => {
               ? new Date(endDate).setDate(new Date(endDate).getDate() - 1)
               : null,
           }}
-          placeholder="Select Check-in Date"
+          placeholder="Check-in Date"
           className="date-input"
         />
 
         {/* Check-out Date */}
-        <label>Check-out Date</label>
         <Flatpickr
           value={endDate}
           onChange={(date) => setEndDate(date[0])}
@@ -129,19 +127,18 @@ const RoomSearch = ({ handleSearchResult }) => {
               ? new Date(startDate).setDate(new Date(startDate).getDate() + 1)
               : new Date().setDate(new Date().getDate() + 1),
           }}
-          placeholder="Select Check-out Date"
+          placeholder="Check-out Date"
           className="date-input"
         />
 
         {/* Room Type */}
-        <label>Room Type</label>
         <select
           value={roomType}
           onChange={(e) => setRoomType(e.target.value)}
           className="room-select"
         >
           <option disabled value="">
-            Select Room Type
+            Room Type
           </option>
           {roomTypes.map((type) => (
             <option value={type} key={type}>
@@ -154,7 +151,7 @@ const RoomSearch = ({ handleSearchResult }) => {
       {/* Search Button */}
       <div className="search-button-container">
         <button className="search-button" onClick={handleInternalSearch}>
-          Search Rooms
+          Search
         </button>
       </div>
 

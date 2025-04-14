@@ -51,6 +51,7 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
+    console.log("🚀 ~ handleSubmit ~ validationErrors:", validationErrors);
 
     if (Object.keys(validationErrors).length > 0) {
       setMessage({ type: "error", text: Object.values(validationErrors)[0] });
@@ -60,6 +61,7 @@ const RegisterPage = () => {
 
     try {
       const resp = await ApiService.registerUser(formData);
+      console.log("🚀 ~ handleSubmit ~ resp:", resp);
       // API trả về ApiResponseUserResponse, kiểm tra code thay vì status
       if (resp.code === 200 || resp.status === 200) {
         // Điều chỉnh theo response thực tế của API

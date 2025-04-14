@@ -1,190 +1,101 @@
 /* Định nghĩa biến CSS toàn cục */
 :root {
-    --primary-color: #ff6f61;
-    --primary-hover: #e65b50;
-    --secondary-color: #333;
-    --text-gray: #666;
-    --light-bg: #fff;
-    --form-bg: #f9f9f9;
-    --border-color: #ccc;
-    --border-light: #dee2e6;
-    --shadow-sm: 0 0 5px rgba(0, 123, 255, 0.3);
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --transition: all 0.3s ease;
-    --focus-color: #007bff;
-    --error-color: #dc3545;
-    --disabled-color: #cccccc;
+  --primary-color: #ff6f61;
+  --primary-hover: #e65b50;
+  --secondary-color: #333;
+  --text-gray: #666;
+  --light-bg: #fff;
+  --form-bg: #f9f9f9;
+  --border-color: #ccc;
+  --border-light: #dee2e6;
+  --shadow-sm: 0 0 5px rgba(0, 123, 255, 0.3);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --transition: all 0.3s ease;
+  --focus-color: #007bff;
+  --error-color: #dc3545;
+  --disabled-color: #cccccc;
 }
 
 /* Reset default styles */
 .user-profile-page * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Page container */
 .user-profile-page {
-    font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 /* Main layout */
 .main-layout {
-    display: flex;
-    min-height: 100vh;
+  display: flex;
+  min-height: 100vh;
 }
 
 /* Sidebar */
 .sidebar {
-    width: 300px;
-    background-color: #f1f1f1;
-    padding: 10px;
-    border-right: 1px solid var(--border-light);
+  width: 300px;
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-right: 1px solid var(--border-light);
 }
 
 .sidebar h2 {
-    font-size: 20px;
-    font-weight: 900;
-    margin-top: 30px;
-    margin-bottom: 50px;
-    color: var(--secondary-color);
-    text-align: center;
-    text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 900;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  color: var(--secondary-color);
+  text-align: center;
+  text-transform: uppercase;
+}
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Khoảng cách giữa các mục */
+  padding: 0 16px;
 }
 
-.sidebar ul {
-    list-style: none;
+.sidebar-links p {
+  cursor: pointer; /* Hiển thị con trỏ khi hover */
+  color: gray; /* Màu chữ xám */
+  font-size: 18px; /* Kích thước chữ */
+  font-weight: bold; /* Chữ in đậm */
+  margin: 0;
+  text-decoration: none; /* Không gạch chân */
+  transition: color 0.3s ease, background-color 0.3s ease; /* Hiệu ứng chuyển màu */
+  padding: 8px 12px; /* Khoảng cách bên trong */
+  border-radius: 4px; /* Bo góc */
 }
 
-.sidebar ul li {
-    margin-bottom: 20px;
+.sidebar-links p:hover {
+  color: black; /* Màu chữ khi hover */
+  background-color: #f0f0f0; /* Màu nền khi hover */
 }
 
-.sidebar ul li a {
-    display: block;
-    padding: 12px;
-    text-decoration: none;
-    color: var(--secondary-color);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    background-color: var(--light-bg);
-    transition: var(--transition);
-    font-size: 16px;
-    line-height: 1.5;
+.sidebar-links p.active {
+  color: black; /* Màu chữ khi active */
+  /* background-color: #fadfd1; Màu nền khi active */
+  border-radius: 4px; /* Bo góc */
 }
-
-.sidebar ul li a:hover {
-    background-color: #e9ecef;
-}
-
 /* Main content */
 .main-content {
-    flex: 1;
-    padding: 15px;
-    background-color: var(--light-bg);
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+  flex: 1;
+  padding: 15px;
+  background-color: var(--light-bg);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
-
-.user-profile-container {
-    max-width: 900px;
-    width: 100%;
-    margin: 0 auto;
-}
-
-.user-profile-title {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: var(--secondary-color);
-    text-align: center;
-}
-
+/* User profile details */
 .user-profile-details {
-    background-color: var(--form-bg);
-    padding: 30px;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-light);
+  background-color: transparent;
+  padding: 30px;
+  /* border-radius: var(--radius-md); */
+  /* border: 1px solid var(--border-light); */
 }
 
-.user-profile-subtitle {
-    font-size: 22px;
-    margin-bottom: 20px;
-    color: var(--secondary-color);
-}
 
-.user-profile-info {
-    display: grid;
-    gap: 20px;
-}
-
-.form-group {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.form-group label {
-    width: 180px;
-    font-size: 18px;
-    color: var(--secondary-color);
-}
-
-.form-input {
-    flex: 1;
-    padding: 12px;
-    font-size: 18px;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    outline: none;
-    min-width: 400px;
-    transition: var(--transition);
-}
-
-.form-input:focus {
-    border-color: var(--focus-color);
-    box-shadow: var(--shadow-sm);
-}
-
-.submit-button {
-    display: block;
-    width: 250px;
-    margin: 30px auto 0;
-    padding: 12px;
-    background-color: var(--primary-color);
-    color: var(--light-bg);
-    border: none;
-    border-radius: var(--radius-sm);
-    font-size: 18px;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.submit-button:hover {
-    background-color: var(--primary-hover);
-}
-
-.submit-button:disabled {
-    background-color: var(--disabled-color);
-    cursor: not-allowed;
-}
-
-/* Loading and error states */
-.loading,
-.error {
-    text-align: center;
-    padding: 20px;
-    font-size: 16px;
-    color: var(--secondary-color);
-}
-
-.error {
-    color: var(--error-color);
-}
-
-.no-data {
-    text-align: center;
-    font-size: 16px;
-    color: var(--text-gray);
-}
